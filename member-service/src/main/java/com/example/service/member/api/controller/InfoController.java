@@ -1,8 +1,5 @@
-package com.example.user.presentation;
+package com.example.service.member.api.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

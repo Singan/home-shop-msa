@@ -4,10 +4,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: user-service  # ? ??? ID
-          uri: lb://user-service  # ??? ?? (Eureka?? ??? ??)
+        - id: member-service  # ? ??? ID
+          uri: lb://member-service  # ??? ?? (Eureka?? ??? ??)
           predicates:
-            - Path=/user-service/**
+            - Path=/member-service/**
           filters:
             - StripPrefix=1
 
