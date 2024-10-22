@@ -1,4 +1,6 @@
 package com.example.service.member.infrastructure.repository;
 
-public interface JpaMemberRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface JpaMemberRepository extends JpaRepository {
 }
