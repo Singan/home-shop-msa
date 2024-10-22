@@ -1,2 +1,3 @@
 rootProject.name = 'home-shop-msa'
+include 'product-service'
 include 'eureka'
