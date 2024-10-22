@@ -8,10 +8,36 @@ spring:
           uri: lb://user-service  # ??? ?? (Eureka?? ??? ??)
           predicates:
             - Path=/user-service/**
+          filters:
+            - StripPrefix=1
+
         - id: order-service
           uri: lb://order-service
           predicates:
             - Path=/order-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/product-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: delivery-service
+          uri: lb://delivery-service
+          predicates:
+            - Path=/delivery-service/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:
