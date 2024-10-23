@@ -1,14 +1,11 @@
 package com.example.service.member.application;
 
 import com.example.service.member.MemberFactory;
-import com.example.service.member.api.request.AuthInfoRequestDto;
-import com.example.service.member.api.request.MemberInfoRequest;
 import com.example.service.member.api.request.MemberSignUpRequest;
-import com.example.service.member.application.dto.MemberSignUpDto;
+import com.example.service.member.api.request.SendEmailAuthentication;
 import com.example.service.member.application.interfaces.MemberService;
-import com.example.service.member.application.usecase.MemberAuthenticationEmailUseCase;
+import com.example.service.member.application.usecase.MemberMailSendUseCase;
 import com.example.service.member.application.usecase.MemberSignUpUseCase;
-import com.example.service.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberSignUpUseCase memberSignUpUseCase;
-    private final MemberAuthenticationEmailUseCase memberAuthenticationEmailUseCase;
+    private final MemberMailSendUseCase memberMailSendUseCase;
 
     public void memberSignUp(MemberSignUpRequest memberSignUpRequest) {
 
@@ -35,7 +32,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void authenticationEmail(String key) {
-
+    public void sendEmail(SendEmailAuthentication sendEmailAuthentication) {
+        memberMailSendUseCase.sendEmail(sendEmailAuthentication.email());
     }
+
+
 }
