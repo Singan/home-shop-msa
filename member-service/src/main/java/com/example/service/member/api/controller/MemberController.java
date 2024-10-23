@@ -1,5 +1,6 @@
 package com.example.service.member.api.controller;
 
+import com.example.service.member.api.request.AuthenticationEmailKeyRequest;
 import com.example.service.member.api.request.MemberSignUpRequest;
 import com.example.service.member.application.interfaces.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,10 @@ public class MemberController {
     @PostMapping
     public void signupMember(@RequestBody MemberSignUpRequest memberSignUpRequest) {
         memberService.memberSignUp(memberSignUpRequest);
+    }
+
+    @PostMapping
+    public void sendEmailNo(@RequestBody AuthenticationEmailKeyRequest inRedisKey){
+
     }
 }

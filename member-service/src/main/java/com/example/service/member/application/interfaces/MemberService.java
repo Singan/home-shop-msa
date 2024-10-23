@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 
     void memberSignUp(MemberSignUpRequest memberSignUpRequest);
+
+    void authenticationEmail(String key);
 }
