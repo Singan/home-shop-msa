@@ -6,4 +6,6 @@ import com.example.service.member.infrastructure.entity.MemberEntity;
 public interface MemberRepository {
 
     void memberSignUp(Member member);
+
+
 }

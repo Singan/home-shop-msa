@@ -10,19 +10,17 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepository {
 
-    private final JpaMemberRepository jpaMemberRepository;
-
+    private final MemberJpaRepository jpaRepository;
     @Override
     public void memberSignUp(Member member) {
         if (existMemberLoginId(member.getLoginId())) {
             throw new IllegalArgumentException("존재하는 유저입니다.");
         }
 
-        jpaMemberRepository.save(MemberEntity.fromDomain(member));
+        jpaRepository.save(MemberEntity.fromDomain(member));
     }
 
     private boolean existMemberLoginId(String loginId) {
-        return jpaMemberRepository.existsByLoginId(loginId);
+        return jpaRepository.existsByLoginId(loginId);
     }
-
 }

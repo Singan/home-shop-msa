@@ -1,7 +1,7 @@
 package com.example.service.member.application.usecase;
 
 import com.example.service.member.MemberFactory;
-import com.example.service.member.application.dto.MemberSignUpDto;
+import com.example.service.member.application.dto.request.MemberSignUpDto;
 import com.example.service.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
 package com.example.service.member;
 
-import com.example.service.member.application.dto.MemberSignUpDto;
+import com.example.service.member.application.dto.request.MemberSignUpDto;
 import com.example.service.member.domain.Member;
-import org.springframework.data.domain.Page;
 
 
 public class MemberFactory {
