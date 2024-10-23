@@ -12,6 +12,6 @@ public class MemberMailConfirmUseCase {
 
 
     public boolean confirmEmailCode(String email , String code){
-        return emailRepository.findEmailCode(email).equals(code);
+        return code.equals(emailRepository.findEmailCode(email));
     }
 }

@@ -8,7 +8,7 @@ import java.time.Duration;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberRedisRepository {
+public class EmailRedisRepository {
     private final StringRedisTemplate stringRedisTemplate;
 
 

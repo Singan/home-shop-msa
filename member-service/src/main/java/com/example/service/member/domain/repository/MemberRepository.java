@@ -7,5 +7,4 @@ public interface MemberRepository {
 
     void memberSignUp(Member member);
 
-
 }

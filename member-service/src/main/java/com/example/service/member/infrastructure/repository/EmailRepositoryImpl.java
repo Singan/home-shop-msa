@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class EmailRepositoryImpl implements EmailRepository {
-    private final MemberRedisRepository redisRepository;
+    private final EmailRedisRepository redisRepository;
 
 
     @Override
