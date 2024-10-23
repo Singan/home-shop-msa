@@ -1,4 +1,4 @@
-package com.example.service.member.api.request;
+package com.example.service.member.api.dto.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

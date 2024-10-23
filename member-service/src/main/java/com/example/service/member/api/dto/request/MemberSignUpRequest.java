@@ -1,6 +1,4 @@
-package com.example.service.member.api.request;
-
-import com.example.service.member.application.dto.MemberSignUpDto;
+package com.example.service.member.api.dto.request;
 
 public record MemberSignUpRequest(
         AuthInfoRequestDto authInfo,
