@@ -49,7 +49,7 @@ public class MemberEntity {
                 .build();
     }
 
-    public static MemberEntity fromDomain(Member member) {
+    public static MemberEntity fromEntity(Member member) {
         return MemberEntity
                 .builder()
                 .id(member.getId())

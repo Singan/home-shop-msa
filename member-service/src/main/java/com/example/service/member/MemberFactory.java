@@ -1,6 +1,7 @@
 package com.example.service.member;
 
 import com.example.service.member.application.dto.request.MemberSignUpDto;
+import com.example.service.member.application.dto.response.MemberTokensDto;
 import com.example.service.member.domain.Member;
 
 
@@ -29,5 +30,9 @@ public class MemberFactory {
                 .name(name)
                 .phone(phone)
                 .build();
+    }
+
+    public static MemberTokensDto createMemberTokensDto (String accessToken , String refreshToken){
+        return new MemberTokensDto(accessToken , refreshToken);
     }
 }

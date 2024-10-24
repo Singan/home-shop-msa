@@ -2,9 +2,12 @@ package com.example.service.member.application;
 
 import com.example.service.member.MemberFactory;
 import com.example.service.member.api.dto.request.ConfirmEmailRequest;
+import com.example.service.member.api.dto.request.MemberLoginRequest;
 import com.example.service.member.api.dto.request.MemberSignUpRequest;
 import com.example.service.member.api.dto.request.SendEmailRequest;
+import com.example.service.member.api.dto.response.MemberLoginResponse;
 import com.example.service.member.application.interfaces.MemberService;
+import com.example.service.member.application.usecase.MemberLoginUseCase;
 import com.example.service.member.application.usecase.MemberMailConfirmUseCase;
 import com.example.service.member.application.usecase.MemberMailSendUseCase;
 import com.example.service.member.application.usecase.MemberSignUpUseCase;
@@ -18,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberSignUpUseCase memberSignUpUseCase;
     private final MemberMailSendUseCase memberMailSendUseCase;
     private final MemberMailConfirmUseCase mailConfirmUseCase;
+    private final MemberLoginUseCase memberLoginUseCase;
 
     public void memberSignUp(MemberSignUpRequest memberSignUpRequest) {
 
@@ -45,5 +49,13 @@ public class MemberServiceImpl implements MemberService {
                 confirmEmailRequest.email(),
                 confirmEmailRequest.code()
         );
+    }
+
+    @Override
+    public MemberLoginResponse memberLogin(MemberLoginRequest memberLoginRequest) {
+        return memberLoginUseCase.memberLogin(
+                memberLoginRequest.id(),
+                memberLoginRequest.password())
+                .getMemberLoginResponse();
     }
 }
