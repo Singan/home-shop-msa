@@ -32,8 +32,10 @@ public class MemberController {
     public void sendEmail(@RequestBody SendEmailRequest sendEmailRequest){
         memberService.sendEmail(sendEmailRequest);
     }
+
     @PostMapping("/email/confirm")
     public boolean confirmEmail(@RequestBody ConfirmEmailRequest confirmEmailRequest){
         return memberService.confirmEmail(confirmEmailRequest);
     }
+
 }

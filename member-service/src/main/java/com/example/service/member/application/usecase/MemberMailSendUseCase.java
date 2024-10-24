@@ -12,6 +12,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +23,9 @@ public class MemberMailSendUseCase {
     private final EmailRepository emailRepository;
     private static final int CODE_LENGTH = 6;
     // Random 객체를 필드로 선언
-    private final Random random = new Random();
+    //private final Random random = new Random();
     @Async
-    public String sendEmail(String to) {
+    public Future<Void> sendEmail(String to) {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper;
 
@@ -39,7 +42,8 @@ public class MemberMailSendUseCase {
             // 메일을 발송합니다.
             javaMailSender.send(message);
             emailRepository.saveEmailCode(to , code);
-            return code;
+            //return code;
+            return CompletableFuture.completedFuture(null);
         } catch (MessagingException e) {
             throw new MailSendException("이메일 전송 중 오류가 발생했습니다.", e);
         }
@@ -67,7 +71,7 @@ public class MemberMailSendUseCase {
 
         // 길이에 맞게 랜덤한 숫자를 생성
         for (int i = 0; i < CODE_LENGTH; i++) {
-            verificationCode.append(random.nextInt(10)); // 0~9의 숫자
+            verificationCode.append(ThreadLocalRandom.current().nextInt(10)); // 0~9의 숫자
         }
 
         return verificationCode.toString();

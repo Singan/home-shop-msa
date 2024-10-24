@@ -48,3 +48,5 @@ eureka:
   instance:
     instance-id: ${spring.application.name}
 
+access:
+  key: sladmflkasmdflkasmdklfmaslkdfmlkasdmflkasmdfkaslmkdf

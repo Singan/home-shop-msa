@@ -33,8 +33,7 @@ public class MemberLoginUseCase {
 
 
     private boolean matches(String encodedPassword, String password) {
-        System.out.println(encodedPassword);
-        System.out.println(password);
+
         return passwordEncoder.matches( password , encodedPassword);
     }
 }

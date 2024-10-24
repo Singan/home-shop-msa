@@ -22,7 +22,7 @@ public class JwtGenerator {
     private String refreshKey;
     private final long accessExpiration = 86400000;
 
-    private final long refreshExpiration = 86400000;
+    private final long refreshExpiration = 86400000 * 3;
     public String generateAccessToken(Member member) {
         long now = System.currentTimeMillis();
 

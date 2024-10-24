@@ -54,8 +54,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberLoginResponse memberLogin(MemberLoginRequest memberLoginRequest) {
         return memberLoginUseCase.memberLogin(
-                memberLoginRequest.id(),
-                memberLoginRequest.password())
+                        memberLoginRequest.id(),
+                        memberLoginRequest.password()
+                )
                 .getMemberLoginResponse();
     }
 }
