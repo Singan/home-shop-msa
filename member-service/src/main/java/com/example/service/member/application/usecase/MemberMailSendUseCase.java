@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -20,6 +21,7 @@ public class MemberMailSendUseCase {
     private static final int CODE_LENGTH = 6;
     // Random 객체를 필드로 선언
     private final Random random = new Random();
+    @Async
     public String sendEmail(String to) {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper;
