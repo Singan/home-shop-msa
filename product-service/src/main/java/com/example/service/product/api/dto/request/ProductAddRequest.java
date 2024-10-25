@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record ProductAddRequest(
-        @NotNull
-        Long id,
+
         @NotNull
         @Min(0)
         Integer stock,

@@ -1,5 +1,6 @@
 package com.example.service.product.application.usecase;
 
+import com.example.service.product.ProductFactory;
 import com.example.service.product.api.dto.request.ProductAddRequest;
 import com.example.service.product.domain.Product;
 import com.example.service.product.domain.repository.ProductRepository;
@@ -11,8 +12,12 @@ import org.springframework.stereotype.Service;
 public class ProductSaveUseCase {
 
     private final ProductRepository productRepository;
+
     public Long productSave(ProductAddRequest product) {
-        return productRepository.productSave(product);
+        return productRepository.productSave(
+                ProductFactory.createProduct(
+                        product.name(), product.description(), product.getOpenTime(), product.stock(), product.price())
+        );
     }
 
 }

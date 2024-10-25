@@ -28,12 +28,15 @@ public class ProductEntity implements Serializable {
     private String description;
     @NotNull
     private Integer price;
+    private LocalDateTime openDateTime;
+
+
+
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    private LocalDateTime openDateTime;
 
 
     public Product toProduct() {
