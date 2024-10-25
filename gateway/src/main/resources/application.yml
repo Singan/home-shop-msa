@@ -4,13 +4,28 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: member-service  # ? ??? ID
-          uri: lb://member-service  # ??? ?? (Eureka?? ??? ??)
+        - id: member-service
+          uri: lb://member-service
+          predicates:
+            - Path=/member-service/members
+            - Method=POST
+          filters:
+            - StripPrefix=1
+        - id: member-service
+          uri: lb://member-service
+          predicates:
+            - Path=/member-service/members/login
+            - Method=POST
+          filters:
+            - StripPrefix=1
+
+        - id: member-service
+          uri: lb://member-service
           predicates:
             - Path=/member-service/**
           filters:
             - StripPrefix=1
-
+            - AuthorizationHeaderFilter
         - id: order-service
           uri: lb://order-service
           predicates:
@@ -49,4 +64,4 @@ eureka:
     instance-id: ${spring.application.name}
 
 access:
-  key: sladmflkasmdflkasmdklfmaslkdfmlkasdmflkasmdfkaslmkdf
+  key: userkeyaccesskeyaldsnalksdnlkjasdfnlkasndlkfasnlkd
