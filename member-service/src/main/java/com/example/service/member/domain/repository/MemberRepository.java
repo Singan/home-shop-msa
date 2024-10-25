@@ -10,4 +10,5 @@ public interface MemberRepository {
     void memberSignUp(Member member);
 
     Optional<Member> findMember(String id);
+    Optional<Member> findMember(Long id);
 }

@@ -30,6 +30,11 @@ public class MemberRepositoryImpl implements MemberRepository {
         return jpaRepository.findByLoginId(id).map(MemberEntity::toDomain);
     }
 
+    @Override
+    public Optional<Member> findMember(Long id) {
+        return jpaRepository.findById(id).map(MemberEntity::toDomain);
+    }
+
 
     private boolean existMemberLoginId(String loginId) {
         return jpaRepository.existsByLoginId(loginId);

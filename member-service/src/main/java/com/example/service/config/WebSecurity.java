@@ -32,6 +32,8 @@ public class WebSecurity {
                 });
         http.formLogin(FormLoginConfigurer::disable);
         http.sessionManagement(SessionManagementConfigurer::disable);
+        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+
         return http.build();
     }
     @Bean
