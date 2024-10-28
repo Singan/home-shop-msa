@@ -1,6 +1,6 @@
 package com.example.service.product.application.usecase;
 
-import com.example.service.product.ProductFactory;
+import com.example.service.product.application.ProductServiceFactory;
 import com.example.service.product.api.dto.request.ProductAddRequest;
 import com.example.service.product.domain.Product;
 import com.example.service.product.domain.repository.ProductRepository;
@@ -15,8 +15,13 @@ public class ProductSaveUseCase {
 
     public Long productSave(ProductAddRequest product) {
         return productRepository.productSave(
-                ProductFactory.createProduct(
-                        product.name(), product.description(), product.getOpenTime(), product.stock(), product.price())
+                Product.builder()
+                        .name(product.name())
+                        .price(product.price())
+                        .stock(product.stock())
+                        .description(product.description())
+                        .openDateTime(product.getOpenTime())
+                        .build()
         );
     }
 

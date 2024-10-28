@@ -2,6 +2,7 @@ package com.example.service.product.api.controller;
 
 import com.example.service.product.api.dto.request.ProductAddRequest;
 import com.example.service.product.api.dto.request.ProductPageRequest;
+import com.example.service.product.api.dto.response.ProductDetailResponse;
 import com.example.service.product.api.dto.response.ProductListResponse;
 import com.example.service.product.application.dto.response.ProductListDto;
 import com.example.service.product.application.interfaces.ProductService;
@@ -24,8 +25,8 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public void findProduct(@PathVariable(name = "productId") Long productId) {
-
+    public ProductDetailResponse productDetail(@PathVariable(name = "productId") Long productId) {
+        return productService.findOne(productId);
     }
 
     @GetMapping

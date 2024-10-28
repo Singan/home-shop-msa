@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
@@ -22,5 +24,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Slice<Product> findAllProducts(Long cursor, Pageable pageable) {
         return jpaProductRepository.findByIdGreaterThan(cursor, pageable).map(ProductEntity::toProduct);
+    }
+
+    @Override
+    public Optional<Product> findOne(Long id) {
+        return jpaProductRepository.findById(id).map(ProductEntity::toProduct);
     }
 }
