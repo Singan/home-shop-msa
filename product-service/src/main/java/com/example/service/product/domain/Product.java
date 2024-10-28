@@ -48,7 +48,7 @@ public class Product {
 
         // 남은 시간을 계산
         if (openDateTime.isBefore(now)) {
-            return "시간이 지났습니다."; // 또는 다른 메시지
+            return "현재 오픈중인 상품입니다."; // 또는 다른 메시지
         }
 
         // 남은 시간을 직접 계산

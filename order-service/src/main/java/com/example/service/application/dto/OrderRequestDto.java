@@ -1,4 +1,4 @@
 package com.example.service.application.dto;
 
-public class MemberSignUpDto {
+public class OrderRequestDto {
 }
