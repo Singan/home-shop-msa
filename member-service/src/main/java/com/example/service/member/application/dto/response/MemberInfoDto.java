@@ -14,7 +14,4 @@ public record MemberInfoDto(
         @NotNull
         String email
 ) {
-        public MemberInfoResponse getMemberInfoResponse(){
-                return new MemberInfoResponse(name , address,phone,email);
-        }
 }

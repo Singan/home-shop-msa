@@ -1,7 +1,7 @@
 package com.example.service.member.application.usecase;
 
 import com.example.service.config.jwt.JwtGenerator;
-import com.example.service.member.MemberFactory;
+import com.example.service.member.application.MemberServiceFactory;
 import com.example.service.member.application.dto.response.MemberTokensDto;
 import com.example.service.member.domain.Member;
 import com.example.service.member.domain.repository.MemberRepository;
@@ -28,7 +28,7 @@ public class MemberLoginUseCase {
         String accessToken = jwtGenerator.generateAccessToken(member);
         String refreshToken = jwtGenerator.generateRefreshToken(member);
 
-        return MemberFactory.createMemberTokensDto(accessToken, refreshToken);
+        return MemberServiceFactory.createMemberTokensDto(accessToken, refreshToken);
     }
 
 

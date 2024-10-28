@@ -1,13 +1,12 @@
 package com.example.service.member.application;
 
-import com.example.service.member.MemberFactory;
+import com.example.service.member.api.MemberApiFactory;
 import com.example.service.member.api.dto.request.ConfirmEmailRequest;
 import com.example.service.member.api.dto.request.MemberLoginRequest;
 import com.example.service.member.api.dto.request.MemberSignUpRequest;
 import com.example.service.member.api.dto.request.SendEmailRequest;
 import com.example.service.member.api.dto.response.MemberInfoResponse;
 import com.example.service.member.api.dto.response.MemberLoginResponse;
-import com.example.service.member.application.dto.response.MemberInfoDto;
 import com.example.service.member.application.interfaces.MemberService;
 import com.example.service.member.application.usecase.*;
 import lombok.RequiredArgsConstructor;
@@ -28,14 +27,7 @@ public class MemberServiceImpl implements MemberService {
     public void memberSignUp(MemberSignUpRequest memberSignUpRequest) {
 
         memberSignUpUseCase.memberSignUp(
-                MemberFactory.createMemberSignDto(
-                        memberSignUpRequest.authInfo().id(),
-                        memberSignUpRequest.authInfo().password(),
-                        memberSignUpRequest.memberInfo().name(),
-                        memberSignUpRequest.memberInfo().phone(),
-                        memberSignUpRequest.memberInfo().address(),
-                        memberSignUpRequest.memberInfo().email()
-                )
+                MemberServiceFactory.createMemberSignUpDto(memberSignUpRequest)
         );
 
     }
@@ -55,15 +47,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberLoginResponse memberLogin(MemberLoginRequest memberLoginRequest) {
-        return memberLoginUseCase.memberLogin(
-                        memberLoginRequest.id(),
-                        memberLoginRequest.password()
-                )
-                .getMemberLoginResponse();
+        return MemberApiFactory.createMemberLoginResponse(memberLoginUseCase.memberLogin(
+                memberLoginRequest.id(),
+                memberLoginRequest.password()
+        ));
+
     }
 
     @Override
     public MemberInfoResponse memberInfo(Long id) {
-        return memberMyPageUseCase.findMemberMyPage(id).getMemberInfoResponse();
+        return MemberApiFactory.createMemberInfoResponse(memberMyPageUseCase.findMemberMyPage(id));
     }
 }
