@@ -18,6 +18,6 @@ public record ProductAddRequest(
         Integer price
 ) {
     public LocalDateTime getOpenTime() {
-        return LocalDateTime.now().plusMinutes((int) (Math.random() * 20) + 5).withNano(0);
+        return LocalDateTime.now().plusMinutes((int) (Math.random() * 20) + 5).withSecond(0).withNano(0);
     }
 }

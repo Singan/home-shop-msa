@@ -1,10 +1,13 @@
 package com.example.service.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+import org.springframework.boot.convert.DurationFormat;
+import org.springframework.boot.convert.DurationStyle;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Builder
 @AllArgsConstructor
+@ToString
+@NoArgsConstructor
 public class Product {
     @NotNull
     private Long id;
@@ -28,7 +33,7 @@ public class Product {
     @Min(0)
     private Integer price;
 
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime openDateTime;
     private LocalDateTime createdAt;
 
@@ -42,13 +47,13 @@ public class Product {
         return stock = stock - updateStock;
     }
     // 남은시간
-
+    @JsonIgnore
     public String getLeftOpenTime() {
         LocalDateTime now = LocalDateTime.now();
 
         // 남은 시간을 계산
         if (openDateTime.isBefore(now)) {
-            return "현재 오픈중인 상품입니다."; // 또는 다른 메시지
+            return "현재 오픈중인 상품입니다.";
         }
 
         // 남은 시간을 직접 계산
@@ -77,6 +82,7 @@ public class Product {
 
         return String.format("%d일 %d시간 %d분 %d초", days, hours, minutes, seconds);
     }
+    @JsonIgnore
 
     public String getFormattedOpenDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

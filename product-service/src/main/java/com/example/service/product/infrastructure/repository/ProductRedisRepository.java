@@ -4,6 +4,7 @@ import com.example.service.product.domain.Product;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,11 +15,14 @@ import java.util.List;
 public class ProductRedisRepository {
 
 
-    private final RedisTemplate<Long, Integer> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
+
 
     public void productStockWarmingUp(List<Product> productList) {
         productList.forEach(product -> {
-            redisTemplate.opsForValue().set(product.getId(), product.getStock());
+            redisTemplate.opsForValue().set(String.valueOf(product.getId()),
+                    String.valueOf(product.getStock())
+            );
         });
     }
 

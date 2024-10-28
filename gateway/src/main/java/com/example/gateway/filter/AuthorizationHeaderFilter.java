@@ -59,6 +59,5 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     }
 
     static class Config {
-        // 설정 관련 필드가 필요한 경우 여기에 추가합니다.
     }
 }

@@ -3,6 +3,7 @@ package com.example.service.product.application.scheduler;
 import com.example.service.product.domain.Product;
 import com.example.service.product.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductScheduler {
 
 
@@ -21,8 +23,12 @@ public class ProductScheduler {
 
     @Scheduled(cron = "0 * * * * *")
     public void warmingStock() {
+
         LocalDateTime cacheWarmupTime = calculateCacheWarmupTime();
+        log.info("Warming stock...  {}" , cacheWarmupTime);
         productRepository.findByWarmingProductList(cacheWarmupTime);
+
+        log.info("Warming stock done.");
     }
 
     private LocalDateTime calculateCacheWarmupTime() {
