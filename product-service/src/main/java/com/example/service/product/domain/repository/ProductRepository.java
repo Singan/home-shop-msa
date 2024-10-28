@@ -4,6 +4,7 @@ import com.example.service.product.domain.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface ProductRepository {
@@ -16,4 +17,6 @@ public interface ProductRepository {
 
 
     Optional<Product> findOne(Long id);
+
+    void findByWarmingProductList(LocalDateTime localDateTime);
 }

@@ -8,26 +8,35 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private final JpaProductRepository jpaProductRepository;
+    private final ProductJpaRepository productJpaRepository;
+    private final ProductRedisRepository productRedisRepository;
 
     @Override
     public Long productSave(Product product) {
-        return jpaProductRepository.save(ProductEntity.fromProduct(product)).getId();
+        return productJpaRepository.save(ProductEntity.fromProduct(product)).getId();
     }
 
     @Override
     public Slice<Product> findAllProducts(Long cursor, Pageable pageable) {
-        return jpaProductRepository.findByIdGreaterThan(cursor, pageable).map(ProductEntity::toProduct);
+        return productJpaRepository.findByIdGreaterThan(cursor, pageable).map(ProductEntity::toProduct);
     }
 
     @Override
     public Optional<Product> findOne(Long id) {
-        return jpaProductRepository.findById(id).map(ProductEntity::toProduct);
+        return productJpaRepository.findById(id).map(ProductEntity::toProduct);
+    }
+    @Override
+    public void findByWarmingProductList(LocalDateTime localDateTime) {
+        List<Product> productList=
+                productJpaRepository.findByWarmingProductList(localDateTime).stream().map(ProductEntity::toProduct).toList();
+        productRedisRepository.productStockWarmingUp(productList);
     }
 }
