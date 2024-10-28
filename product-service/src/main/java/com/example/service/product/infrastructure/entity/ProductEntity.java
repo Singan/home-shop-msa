@@ -32,7 +32,7 @@ public class ProductEntity implements Serializable {
 
 
 
-
+    private Boolean isReturnable;
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;

@@ -32,6 +32,7 @@ spring:
             - Path=/order-service/**
           filters:
             - StripPrefix=1
+            - AuthorizationHeaderFilter
 
         - id: product-service
           uri: lb://product-service
