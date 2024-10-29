@@ -42,4 +42,14 @@ public class OrderEntity implements Serializable {
                 .quantity(quantity)
                 .build();
     }
+
+    public static OrderEntity fromOrder(Order order) {
+        return OrderEntity.builder()
+                .id(order.getId())
+                .memberId(order.getMemberId())
+                .productId(order.getProductId())
+                .quantity(order.getQuantity())
+                .price(order.getPrice())
+                .build();
+    }
 }
