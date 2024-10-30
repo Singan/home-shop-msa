@@ -1,10 +1,8 @@
 package com.example.service.infrastructure.entity;
 
 import com.example.service.domain.Order;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.service.domain.enums.OrderStatus;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -24,12 +22,15 @@ public class OrderEntity implements Serializable {
 
 
     private Integer quantity;
-    private Integer price;
+    private Integer totalPrice;
     private Long productId;
     private Long memberId;
 
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.PENDING;
 
 
     public Order toOrder() {
@@ -38,8 +39,9 @@ public class OrderEntity implements Serializable {
                 .id(id)
                 .memberId(memberId)
                 .productId(productId)
-                .price(price)
+                .totalPrice(totalPrice)
                 .quantity(quantity)
+                .status(status)
                 .build();
     }
 
@@ -49,7 +51,8 @@ public class OrderEntity implements Serializable {
                 .memberId(order.getMemberId())
                 .productId(order.getProductId())
                 .quantity(order.getQuantity())
-                .price(order.getPrice())
+                .totalPrice(order.getTotalPrice())
+                .status(order.getStatus())
                 .build();
     }
 }
