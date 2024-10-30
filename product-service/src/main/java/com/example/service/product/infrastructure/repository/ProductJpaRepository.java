@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface ProductJpaRepository extends JpaRepository<ProductEntity , Long> {
     @Query("select p from ProductEntity p where p.id > :id and p.stock>0")
-
     Slice<ProductEntity> findByIdGreaterThan(@Param("id") Long id, Pageable pageable);
 
 
