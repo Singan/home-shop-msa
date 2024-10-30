@@ -1,6 +1,9 @@
 package com.example.service.application;
 
+import com.example.service.api.OrderAPIFactory;
 import com.example.service.api.dto.request.OrderRequest;
+import com.example.service.api.dto.response.OrderPlaceResponse;
+import com.example.service.application.dto.response.OrderPlaceResponseDto;
 import com.example.service.application.interfaces.OrderService;
 import com.example.service.application.usecase.OrderRequestUseCase;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +15,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRequestUseCase orderRequestUseCase;
     @Override
-    public Long orderRequest(OrderRequest orderRequest, Long userId) {
+    public OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId) {
 
-        orderRequestUseCase.placeOrder(OrderServiceFactory.createOrderRequestDto(orderRequest , userId));
+        OrderPlaceResponseDto orderPlaceResponseDto =
+                orderRequestUseCase.placeOrder(OrderServiceFactory.createOrderRequestDto(orderRequest , userId));
 
-        return 0L;
+        return OrderAPIFactory.creOrderPlaceResponse(orderPlaceResponseDto);
     }
 }

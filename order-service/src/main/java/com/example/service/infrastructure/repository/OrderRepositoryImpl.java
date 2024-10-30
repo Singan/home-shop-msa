@@ -13,8 +13,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     private final JpaOrderRepository jpaOrderRepository;
 
     @Override
-    public Long placeOrder(Order order) {
+    public Order placeOrder(Order order) {
 
-        return jpaOrderRepository.save(OrderEntity.fromOrder(order)).getId();
+        return jpaOrderRepository.save(OrderEntity.fromOrder(order)).toOrder();
     }
 }

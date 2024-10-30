@@ -5,5 +5,5 @@ import com.example.service.domain.Order;
 public interface OrderRepository {
 
 
-    Long placeOrder(Order order);
+    Order placeOrder(Order order);
 }
