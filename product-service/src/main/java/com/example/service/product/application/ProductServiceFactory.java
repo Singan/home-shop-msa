@@ -1,11 +1,13 @@
 package com.example.service.product.application;
 
+import com.example.service.product.application.dto.cache.ProductDetailCacheDto;
 import com.example.service.product.application.dto.response.ProductDetailDto;
 import com.example.service.product.application.dto.response.ProductListDto;
 import com.example.service.product.application.dto.response.ProductListItemDto;
 import com.example.service.product.domain.Product;
 import org.springframework.data.domain.Slice;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,6 @@ public class ProductServiceFactory {
 
     public static ProductListDto createProductListDto(Slice<Product> products) {
 
-        // products에서 제품 정보를 DTO 리스트로 변환
         List<ProductListItemDto> productDtos = products.getContent().stream()
                 .map(ProductServiceFactory::createProductListItemDto)
                 .collect(Collectors.toList());
@@ -37,6 +38,17 @@ public class ProductServiceFactory {
                 product.getId(), product.getStock(), product.getName(), product.getPrice(),
                 product.getFormattedOpenDateTime(), product.getLeftOpenTime(),product.getDescription()
         );
+    }
+
+
+    public static ProductDetailCacheDto createProductDetailCacheDto(Product product) {
+        return ProductDetailCacheDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .openDateTime(product.getOpenDateTime().format(DateTimeFormatter.ISO_DATE_TIME))
+                .price(product.getPrice())
+                .build();
     }
 
 }
