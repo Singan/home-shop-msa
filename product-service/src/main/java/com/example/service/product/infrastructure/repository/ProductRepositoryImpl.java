@@ -4,6 +4,7 @@ import com.example.service.product.domain.Product;
 import com.example.service.product.domain.repository.ProductRepository;
 import com.example.service.product.infrastructure.entity.ProductEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Cacheable(value = "products", key = "'product:' + #id")
+
     public Optional<Product> findOne(Long id) {
         return productJpaRepository.findById(id).map(ProductEntity::toProduct);
     }
