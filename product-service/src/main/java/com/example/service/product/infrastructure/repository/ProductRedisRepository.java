@@ -15,14 +15,13 @@ import java.util.List;
 public class ProductRedisRepository {
 
 
-    private final RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, Product> redisTemplate;
 
 
     public void productStockWarmingUp(List<Product> productList) {
         productList.forEach(product -> {
             redisTemplate.opsForValue().set(String.valueOf(product.getId()),
-                    String.valueOf(product.getStock())
-            );
+                    product);
         });
     }
 

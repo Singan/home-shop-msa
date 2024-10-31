@@ -31,7 +31,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    @Cacheable(value = "products", key = "'product:' + #id")
+    @Cacheable(value = "products", key = "#id")
 
     public Optional<Product> findOne(Long id) {
         return productJpaRepository.findById(id).map(ProductEntity::toProduct);
@@ -39,7 +39,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void findByWarmingProductList(LocalDateTime localDateTime) {
         List<Product> productList=
-                productJpaRepository.findByWarmingProductList(localDateTime).stream().map(ProductEntity::toProduct).toList();
+                productJpaRepository.findByWarmingProductList(localDateTime)
+                        .stream().map(ProductEntity::toProduct).toList();
         productRedisRepository.productStockWarmingUp(productList);
     }
 }
