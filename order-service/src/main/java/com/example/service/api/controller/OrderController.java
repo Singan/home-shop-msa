@@ -1,6 +1,7 @@
 package com.example.service.api.controller;
 
 import com.example.service.api.dto.request.OrderRequest;
+import com.example.service.api.dto.response.OrderPlaceResponse;
 import com.example.service.application.interfaces.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public Long orderRequest(@RequestBody @Valid OrderRequest orderRequest , @RequestHeader("X-User-Id") Long userId) {
-        return orderService.orderRequest(orderRequest , userId);
+    public OrderPlaceResponse placeOrder(@RequestBody @Valid OrderRequest orderRequest , @RequestHeader("X-User-Id") Long userId) {
+        return orderService.placeOrder(orderRequest , userId);
     }
 }
