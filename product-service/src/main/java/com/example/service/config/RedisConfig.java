@@ -1,5 +1,6 @@
 package com.example.service.config;
 
+import com.example.service.product.application.dto.cache.ProductDetailCacheDto;
 import com.example.service.product.domain.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.CacheManager;
@@ -9,24 +10,26 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.*;
 
 @Configuration
 public class RedisConfig {
 
 
     @Bean
-    public RedisTemplate<String, Product> redisTemplate(RedisConnectionFactory redisConnectionFactory ,
-                                                        ObjectMapper objectMapper) {
-        RedisTemplate<String, Product> template = new RedisTemplate<>();
+    public RedisTemplate<String, ProductDetailCacheDto> productDetailRedisTemplate(
+            RedisConnectionFactory redisConnectionFactory , ObjectMapper objectMapper) {
+        RedisTemplate<String, ProductDetailCacheDto> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
-
+//        Jackson2JsonRedisSerializer<ProductDetailCacheDto> serializer =
+//                new Jackson2JsonRedisSerializer<>(ProductDetailCacheDto.class);
+//        template.setDefaultSerializer(serializer);
         return template;
     }
+
+
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory , ObjectMapper objectMapper) {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()

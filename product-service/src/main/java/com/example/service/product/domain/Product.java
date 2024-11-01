@@ -39,7 +39,6 @@ public class Product implements Serializable {
     @Min(0)
     private Integer price;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime openDateTime;
     private LocalDateTime createdAt;
 
