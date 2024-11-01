@@ -9,24 +9,31 @@ import com.example.service.domain.enums.OrderStatus;
 import com.example.service.domain.repository.OrderRepository;
 import com.example.service.infrastructure.client.product.ProductClient;
 import com.example.service.infrastructure.client.product.response.ProductDetailResponse;
+import com.example.service.infrastructure.repository.ProductStockRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class OrderRequestUseCase {
+
     private final OrderValidator orderValidator;
     private final OrderRepository orderRepository;
     private final ProductClient productClient;
+    private final ProductStockRepository productStockRepository;  // 추가
 
+    @Transactional
     public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
         ProductDetailResponse product = productClient.getProductDetail(orderRequestDto.productId());
 
-        // 가격 정보는 DB에서 가져오므로 orderRequestDto에는 포함되지 않아도 됨
         if (!orderValidator.isValidOrder(product, orderRequestDto)) {
             throw new RuntimeException("주문이 유효하지 않습니다.");
         }
 
+
+
+        // 주문 생성
         Order order = Order.builder()
                 .memberId(orderRequestDto.userId())
                 .productId(orderRequestDto.productId())
@@ -36,11 +43,8 @@ public class OrderRequestUseCase {
                 .build();
 
         order = orderRepository.placeOrder(order);
-
-
-
-
-        return OrderServiceFactory.createOrderPlaceResponseDto(order , product, orderRequestDto.userId());
+        productStockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock());
+        return OrderServiceFactory.createOrderPlaceResponseDto(order, product, orderRequestDto.userId());
     }
-
 }
+
