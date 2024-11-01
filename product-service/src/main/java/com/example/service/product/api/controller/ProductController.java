@@ -19,7 +19,6 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-
     public Long saveProduct(@RequestBody ProductAddRequest productAddRequest) {
         return productService.saveProduct(productAddRequest);
     }
