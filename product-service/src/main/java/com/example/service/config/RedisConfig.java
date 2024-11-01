@@ -22,10 +22,9 @@ public class RedisConfig {
         RedisTemplate<String, ProductDetailCacheDto> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
-//        Jackson2JsonRedisSerializer<ProductDetailCacheDto> serializer =
-//                new Jackson2JsonRedisSerializer<>(ProductDetailCacheDto.class);
-//        template.setDefaultSerializer(serializer);
+        Jackson2JsonRedisSerializer<ProductDetailCacheDto> serializer =
+                new Jackson2JsonRedisSerializer<>(ProductDetailCacheDto.class);
+        template.setDefaultSerializer(serializer);
         return template;
     }
 

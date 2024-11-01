@@ -16,7 +16,7 @@ public class JacksonConfig {
         objectMapper.registerModule(new JavaTimeModule());
         PolymorphicTypeValidator validator = BasicPolymorphicTypeValidator
                 .builder()
-                .allowIfBaseType(ProductDetailCacheDto.class)
+                .allowIfBaseType(Object.class)
                 .build();
         objectMapper.activateDefaultTyping(validator , ObjectMapper.DefaultTyping.NON_FINAL);
         return objectMapper;
