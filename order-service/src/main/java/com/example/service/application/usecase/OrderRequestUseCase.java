@@ -21,9 +21,8 @@ public class OrderRequestUseCase {
     private final OrderValidator orderValidator;
     private final OrderRepository orderRepository;
     private final ProductClient productClient;
-    private final ProductStockRepository productStockRepository;  // 추가
+    private final ProductStockRepository productStockRepository;
 
-    @Transactional
     public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
         ProductDetailResponse product = productClient.getProductDetail(orderRequestDto.productId());
 
@@ -31,9 +30,11 @@ public class OrderRequestUseCase {
             throw new RuntimeException("주문이 유효하지 않습니다.");
         }
 
+        return saveOrder(orderRequestDto, product);
+    }
 
-
-        // 주문 생성
+    @Transactional
+    protected OrderPlaceResponseDto saveOrder(OrderRequestDto orderRequestDto, ProductDetailResponse product) {
         Order order = Order.builder()
                 .memberId(orderRequestDto.userId())
                 .productId(orderRequestDto.productId())
@@ -42,8 +43,7 @@ public class OrderRequestUseCase {
                 .status(OrderStatus.PENDING)
                 .build();
 
-        order = orderRepository.placeOrder(order);
-        productStockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock());
+        order = orderRepository.saveOrder(order);
         return OrderServiceFactory.createOrderPlaceResponseDto(order, product, orderRequestDto.userId());
     }
 }
