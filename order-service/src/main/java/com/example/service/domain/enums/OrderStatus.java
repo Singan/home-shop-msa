@@ -1,11 +1,11 @@
 package com.example.service.domain.enums;
 
 public enum OrderStatus {
-    PENDING("주문이 접수 전"),
-    SHIPPED("주문이 발송됨"),
-    DELIVERED("주문이 고객에게 전달됨"),
-    CANCELLED("주문이 취소됨"),
-    RETURNED("주문이 반품됨");
+    PENDING("주문 접수 전"),
+    SHIPPED("배송 중"),
+    DELIVERED("배송 완료"),
+    CANCELLED("주문 취소"),
+    RETURNED("주문 반품");
 
     private final String description;
 

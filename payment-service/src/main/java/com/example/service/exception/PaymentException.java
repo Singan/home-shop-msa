@@ -1,4 +1,4 @@
 package com.example.service.exception;
 
-public class MemberException {
+public class PaymentException {
 }

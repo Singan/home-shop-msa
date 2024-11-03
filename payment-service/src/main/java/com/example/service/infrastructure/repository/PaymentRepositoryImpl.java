@@ -1,4 +1,4 @@
 package com.example.service.infrastructure.repository;
 
-public interface JpaMemberRepository {
+public class PaymentRepositoryImpl {
 }
