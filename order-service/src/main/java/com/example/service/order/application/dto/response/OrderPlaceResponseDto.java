@@ -10,6 +10,10 @@ public record OrderPlaceResponseDto(
         Integer productPrice,
         Integer totalPrice,
         Integer quantity,
-        LocalDateTime orderDate
+        LocalDateTime orderDate,
+        String userName,
+        String address,
+        String phone,
+        String email
 ) {
 }

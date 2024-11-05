@@ -2,7 +2,7 @@ package com.example.service.infrastructure.client.product;
 
 
 import com.example.service.product.ProductClient;
-import com.example.service.product.dto.ProductDetailResponse;
+import com.example.service.product.dto.ProductDetailDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +21,7 @@ class ProductClientTest {
     @Test
     void testGetProductDetail() {
         // when
-        ProductDetailResponse response = productClient.getProductDetail(1L);
+        ProductDetailDto response = productClient.getProductDetail(1L);
 
         // then
         assertThat(response).isNotNull();

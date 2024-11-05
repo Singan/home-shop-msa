@@ -1,7 +1,7 @@
 package com.example.service.order.domain;
 
 import com.example.service.order.application.dto.request.OrderRequestDto;
-import com.example.service.product.dto.ProductDetailResponse;
+import com.example.service.product.dto.ProductDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 @RequiredArgsConstructor
 public class OrderValidator {
-    public boolean isValidOrder(ProductDetailResponse product, OrderRequestDto orderRequest) {
+    public boolean isValidOrder(ProductDetailDto product, OrderRequestDto orderRequest) {
         return isProductOpen(product.openDateTime()) &&
                 hasSufficientStock(product.stock(), orderRequest.buyStock());
     }
