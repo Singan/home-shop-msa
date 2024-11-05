@@ -1,6 +1,6 @@
 package com.example.service.member.application.usecase;
 
-import com.example.service.config.jwt.JwtGenerator;
+import com.example.config.jwt.JwtGenerator;
 import com.example.service.member.application.MemberServiceFactory;
 import com.example.service.member.application.dto.response.MemberTokensDto;
 import com.example.service.member.domain.Member;

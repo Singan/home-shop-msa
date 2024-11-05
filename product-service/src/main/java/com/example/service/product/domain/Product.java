@@ -1,18 +1,10 @@
 package com.example.service.product.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.boot.convert.DurationFormat;
-import org.springframework.boot.convert.DurationStyle;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,30 +12,27 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @NoArgsConstructor
 public class Product implements Serializable {
     @NotNull
     private Long id;
-
-
     @NotNull
     @Min(0)
     private Integer stock;
     @NotNull
     private String name;
-
     private String description;
     @NotNull
     @Min(0)
     private Integer price;
-
     private LocalDateTime openDateTime;
     private LocalDateTime createdAt;
 
     public int increaseStock(int updateStock) {
-        return stock = stock + updateStock;
+        stock = stock + updateStock;
+        return stock;
     }
 
     public int decreaseStock(int updateStock) {
@@ -88,8 +77,8 @@ public class Product implements Serializable {
 
         return String.format("%d일 %d시간 %d분 %d초", days, hours, minutes, seconds);
     }
-    @JsonIgnore
 
+    @JsonIgnore
     public String getFormattedOpenDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return openDateTime.format(formatter);
