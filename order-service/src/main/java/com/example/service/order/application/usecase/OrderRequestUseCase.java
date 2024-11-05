@@ -44,6 +44,7 @@ public class OrderRequestUseCase {
                 .build();
 
         order = orderRepository.saveOrder(order);
+        productStockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock());
         return OrderServiceFactory.createOrderPlaceResponseDto(order, product, orderRequestDto.userId());
     }
 }
