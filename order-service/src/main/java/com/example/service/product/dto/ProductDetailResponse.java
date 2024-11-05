@@ -1,4 +1,4 @@
-package com.example.service.order.infrastructure.client.product.response;
+package com.example.service.product.dto;
 
 public record ProductDetailResponse(Long id,
                                     Integer stock,

@@ -4,7 +4,7 @@ import com.example.service.order.api.dto.request.OrderRequest;
 import com.example.service.order.application.dto.request.OrderRequestDto;
 import com.example.service.order.application.dto.response.OrderPlaceResponseDto;
 import com.example.service.order.domain.Order;
-import com.example.service.order.infrastructure.client.product.response.ProductDetailResponse;
+import com.example.service.product.dto.ProductDetailResponse;
 
 public class OrderServiceFactory {
 

@@ -7,9 +7,9 @@ import com.example.service.order.domain.Order;
 import com.example.service.order.domain.OrderValidator;
 import com.example.service.order.domain.enums.OrderStatus;
 import com.example.service.order.domain.repository.OrderRepository;
-import com.example.service.order.infrastructure.client.product.ProductClient;
-import com.example.service.order.infrastructure.client.product.response.ProductDetailResponse;
-import com.example.service.order.infrastructure.repository.ProductStockRepository;
+import com.example.service.product.ProductClient;
+import com.example.service.product.dto.ProductDetailResponse;
+import com.example.service.order.infrastructure.repository.StockRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class OrderRequestUseCase {
     private final OrderValidator orderValidator;
     private final OrderRepository orderRepository;
     private final ProductClient productClient;
-    private final ProductStockRepository productStockRepository;
+    private final StockRepository stockRepository;
 
     public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
         ProductDetailResponse product = productClient.getProductDetail(orderRequestDto.productId());
@@ -44,7 +44,7 @@ public class OrderRequestUseCase {
                 .build();
 
         order = orderRepository.saveOrder(order);
-        productStockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock());
+        stockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock());
         return OrderServiceFactory.createOrderPlaceResponseDto(order, product, orderRequestDto.userId());
     }
 }

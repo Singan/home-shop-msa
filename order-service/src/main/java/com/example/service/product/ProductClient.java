@@ -1,6 +1,6 @@
-package com.example.service.order.infrastructure.client.product;
+package com.example.service.product;
 
-import com.example.service.order.infrastructure.client.product.response.ProductDetailResponse;
+import com.example.service.product.dto.ProductDetailResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;

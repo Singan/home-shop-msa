@@ -8,13 +8,12 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Repository
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class ProductStockRepository {
+public class StockRepository {
 
     private final StringRedisTemplate stringRedisTemplate;
     private static final String PRODUCT_STOCK_KEY_PREFIX = "product:stock:";

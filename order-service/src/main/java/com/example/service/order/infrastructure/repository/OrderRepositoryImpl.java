@@ -13,18 +13,18 @@ import java.util.List;
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
 
-    private final JpaOrderRepository jpaOrderRepository;
+    private final OrderJpaRepository orderJpaRepository;
 
 
     @Override
     public Order saveOrder(Order order) {
 
-        return jpaOrderRepository.save(OrderEntity.fromOrder(order)).toOrder();
+        return orderJpaRepository.save(OrderEntity.fromOrder(order)).toOrder();
     }
 
     @Override
     public List<Order> findAll(Long userId, Pageable pageable) {
-        return jpaOrderRepository.
+        return orderJpaRepository.
                 findAllByMemberId(userId, pageable)
                 .map(OrderEntity::toOrder)
                 .stream().toList();
