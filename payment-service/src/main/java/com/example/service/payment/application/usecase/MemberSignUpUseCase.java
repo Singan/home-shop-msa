@@ -1,4 +1,4 @@
-package com.example.service.application.usecase;
+package com.example.service.payment.application.usecase;
 
 import org.springframework.stereotype.Service;
 
