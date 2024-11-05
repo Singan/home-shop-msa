@@ -10,7 +10,6 @@ public record OrderPlaceResponseDto(
         Integer productPrice,
         Integer totalPrice,
         Integer quantity,
-        LocalDateTime orderDate,
         String userName,
         String address,
         String phone,

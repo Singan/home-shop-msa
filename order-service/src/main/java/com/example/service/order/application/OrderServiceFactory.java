@@ -26,7 +26,6 @@ public class OrderServiceFactory {
                 productDetailDto.price(),
                 order.getTotalPrice(),
                 order.getQuantity(),
-                order.getCreatedAt(),
                 memberInfoDto.name(),
                 memberInfoDto.address(),
                 memberInfoDto.phone(),

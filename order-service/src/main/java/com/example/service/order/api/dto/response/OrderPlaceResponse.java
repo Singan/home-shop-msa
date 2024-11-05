@@ -9,5 +9,8 @@ public record OrderPlaceResponse(Long orderId,
                                  Integer productPrice,
                                  Integer totalPrice,
                                  Integer quantity,
-                                 LocalDateTime orderDate) {
+                                 String userName,
+                                 String address,
+                                 String phone,
+                                 String email) {
 }

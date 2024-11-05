@@ -16,7 +16,10 @@ public class OrderAPIFactory {
                 orderPlaceResponseDto.productPrice(),
                 orderPlaceResponseDto.totalPrice(),
                 orderPlaceResponseDto.quantity(),
-                orderPlaceResponseDto.orderDate()
+                orderPlaceResponseDto.userName(),
+                orderPlaceResponseDto.address(),
+                orderPlaceResponseDto.phone(),
+                orderPlaceResponseDto.email()
         );
     }
 }
