@@ -47,6 +47,8 @@ spring:
             - Path=/payment-service/**
           filters:
             - StripPrefix=1
+            - AuthorizationHeaderFilter
+
 
         - id: delivery-service
           uri: lb://delivery-service
