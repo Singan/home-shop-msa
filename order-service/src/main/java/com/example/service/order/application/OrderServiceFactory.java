@@ -39,6 +39,7 @@ public class OrderServiceFactory {
                 order.getId(),
                 order.getProductId(),
                 order.getMemberId(),
+                order.getQuantity(),
                 order.getCreatedAt(),
                 order.getStatus()
         );

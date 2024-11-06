@@ -30,6 +30,7 @@ public class OrderAPIFactory {
         return new OrderInfoToPaymentResponse(
                 orderInfoToPaymentResponseDto.productId(),
                 orderInfoToPaymentResponseDto.orderId(),
+                orderInfoToPaymentResponseDto.quantity(),
                 orderInfoToPaymentResponseDto.orderTime(),
                 orderInfoToPaymentResponseDto.orderStatus()
         );

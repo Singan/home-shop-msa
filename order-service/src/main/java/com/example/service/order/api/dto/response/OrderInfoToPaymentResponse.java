@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public record OrderInfoToPaymentResponse(
         Long productId,
         Long orderId,
+        Integer quantity,
         LocalDateTime orderTime,
         OrderStatus orderStatus) {
 }

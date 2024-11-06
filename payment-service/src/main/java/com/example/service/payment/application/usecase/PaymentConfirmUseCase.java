@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class PaymentConfirmUseCase {
     private final PGRepository pgRepository;
     private final PaymentRepository paymentRepository;
-
     private final KafkaTemplate<String, StockDecreaseDto> kafkaTemplate;
 
     private final OrderClient orderClient;
@@ -51,7 +50,7 @@ public class PaymentConfirmUseCase {
 
         if (paymentStatus.equals(PaymentStatus.success)) { // 성공 했다면 재고 차감을 위해 메시지를 발행한다.
             kafkaTemplate.send("product-stock-topics",
-                    new StockDecreaseDto(orderInfoDto.getProductId(), orderInfoDto.getStock())
+                    new StockDecreaseDto(orderInfoDto.getProductId(), orderInfoDto.getQuantity())
             );
         }
 
@@ -61,7 +60,7 @@ public class PaymentConfirmUseCase {
                 .price(paymentConfirmRequestDto.price())
                 .build();
 
-        paymentRepository.save(payment);
+        payment = paymentRepository.save(payment);
 
         return PaymentServiceFactory.createPaymentConfirmResponseDto(payment);
     }

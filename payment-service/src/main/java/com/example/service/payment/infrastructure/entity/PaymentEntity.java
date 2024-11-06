@@ -31,6 +31,7 @@ public class PaymentEntity {
 
     public Payment toPayment() {
         return Payment.builder()
+                .id(id)
                 .orderId(orderId)
                 .createdAt(createdAt)
                 .status(status)
