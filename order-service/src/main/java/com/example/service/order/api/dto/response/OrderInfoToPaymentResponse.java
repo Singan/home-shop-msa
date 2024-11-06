@@ -1,15 +1,12 @@
 package com.example.service.order.api.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.example.service.order.domain.enums.OrderStatus;
 
 import java.time.LocalDateTime;
 
-public record OrderInfoResponse(
+public record OrderInfoToPaymentResponse(
         Long productId,
-        Long userId,
-        Integer stock,
         Long orderId,
         LocalDateTime orderTime,
-        String orderStatus) {
+        OrderStatus orderStatus) {
 }

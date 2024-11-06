@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -28,5 +29,10 @@ public class OrderRepositoryImpl implements OrderRepository {
                 findAllByMemberId(userId, pageable)
                 .map(OrderEntity::toOrder)
                 .stream().toList();
+    }
+
+    @Override
+    public Optional<Order> findById(Long id) {
+        return orderJpaRepository.findById(id).map(OrderEntity::toOrder);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.service.order.api.controller;
 
 import com.example.service.order.api.dto.request.OrderRequest;
-import com.example.service.order.api.dto.response.OrderInfoResponse;
+import com.example.service.order.api.dto.response.OrderInfoToPaymentResponse;
 import com.example.service.order.api.dto.response.OrderPlaceResponse;
 import com.example.service.order.application.interfaces.OrderService;
 import jakarta.validation.Valid;
@@ -19,8 +19,8 @@ public class OrderController {
         return orderService.placeOrder(orderRequest, userId);
     }
 
-    @GetMapping("/{orderId}")
-    public OrderInfoResponse orderInfoDetail(@PathVariable("orderId") Long orderId, @RequestHeader("X-User-Id") Long userId) {
+    @GetMapping("/{orderId}/payment-info")
+    public OrderInfoToPaymentResponse orderInfoToPayment(@PathVariable("orderId") Long orderId, @RequestHeader("X-User-Id") Long userId) {
         return orderService.orderDetail(orderId,userId);
     }
 }

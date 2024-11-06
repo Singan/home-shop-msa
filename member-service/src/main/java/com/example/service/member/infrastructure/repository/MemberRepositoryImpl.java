@@ -24,10 +24,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public Optional<Member> findMember(String id) {
-
-
-        return jpaRepository.findByLoginId(id).map(MemberEntity::toDomain);
+    public Optional<Member> findMember(String loginId) {
+        return jpaRepository.findByLoginId(loginId).map(MemberEntity::toDomain);
     }
 
     @Override
