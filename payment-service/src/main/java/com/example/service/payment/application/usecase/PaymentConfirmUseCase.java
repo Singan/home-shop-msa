@@ -2,9 +2,8 @@ package com.example.service.payment.application.usecase;
 
 import com.example.service.order.OrderClient;
 import com.example.service.order.dto.OrderInfoDto;
-import com.example.service.payment.api.response.PaymentConfirmResponse;
 import com.example.service.payment.application.PaymentServiceFactory;
-import com.example.service.payment.application.dto.mesaage.StockDecreaseDto;
+import com.example.service.payment.application.dto.message.StockDecreaseDto;
 import com.example.service.payment.application.dto.request.PaymentConfirmRequestDto;
 import com.example.service.payment.application.dto.response.PaymentConfirmResponseDto;
 import com.example.service.payment.domain.Payment;
