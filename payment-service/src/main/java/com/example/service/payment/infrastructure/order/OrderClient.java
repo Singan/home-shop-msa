@@ -1,8 +1,7 @@
-package com.example.service.order;
+package com.example.service.payment.infrastructure.order;
 
-import com.example.service.order.dto.OrderInfoDto;
+import com.example.service.payment.infrastructure.order.dto.OrderInfoDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

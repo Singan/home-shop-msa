@@ -1,4 +1,4 @@
-package com.example.service.payment.application.dto.message;
+package com.example.service.payment.infrastructure.product.dto;
 
 
 import lombok.Getter;
