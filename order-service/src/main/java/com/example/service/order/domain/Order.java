@@ -27,4 +27,9 @@ public class Order {
     @NotNull
     private LocalDateTime createdAt;
     private OrderStatus status;
+
+
+    public void orderConfirm() {
+        status = OrderStatus.CONFIRM;
+    }
 }

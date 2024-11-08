@@ -1,6 +1,7 @@
 package com.example.service.order.infrastructure.repository;
 
 import com.example.service.order.domain.Order;
+import com.example.service.order.domain.enums.OrderStatus;
 import com.example.service.order.domain.repository.OrderRepository;
 import com.example.service.order.infrastructure.entity.OrderEntity;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Optional<Order> findById(Long id) {
         return orderJpaRepository.findById(id).map(OrderEntity::toOrder);
+    }
+
+    @Override
+    public Optional<Order> findByIdAndPending(Long id) {
+        return orderJpaRepository.findByIdAndStatus(id, OrderStatus.PENDING).map(OrderEntity::toOrder);
     }
 }

@@ -1,8 +1,8 @@
 package com.example.service.infrastructure.client.product;
 
 
-import com.example.service.product.ProductClient;
-import com.example.service.product.dto.ProductDetailDto;
+import com.example.service.order.infrastructure.product.ProductClient;
+import com.example.service.order.infrastructure.product.dto.ProductDetailDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

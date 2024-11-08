@@ -19,9 +19,7 @@ public class StockRepository {
     private static final String PRODUCT_STOCK_KEY_PREFIX = "product:stock:";
 
     public Integer decreaseStock(Long productId, Integer quantity) {
-        String stockKey = PRODUCT_STOCK_KEY_PREFIX + productId;
-
-        String luaScript = "local stock = redis.call('GET', KEYS[1]) " +
+        final String luaScript = "local stock = redis.call('GET', KEYS[1]) " +
                 "if not stock then " +
                 "   return -1 " +  // 재고가 없는 경우
                 "elseif tonumber(stock) < tonumber(ARGV[1]) then " +
@@ -30,7 +28,7 @@ public class StockRepository {
                 "   redis.call('DECRBY', KEYS[1], ARGV[1]) " +
                 "   return redis.call('GET', KEYS[1]) " +
                 "end";
-
+        String stockKey = PRODUCT_STOCK_KEY_PREFIX + productId;
         DefaultRedisScript<Long> script = new DefaultRedisScript<>(luaScript, Long.class);
         Long updatedStock = stringRedisTemplate.execute(script, Collections.singletonList(stockKey), quantity.toString());
 

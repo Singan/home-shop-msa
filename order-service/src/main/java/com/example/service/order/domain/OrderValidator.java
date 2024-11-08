@@ -1,7 +1,7 @@
 package com.example.service.order.domain;
 
 import com.example.service.order.application.dto.request.OrderRequestDto;
-import com.example.service.product.dto.ProductDetailDto;
+import com.example.service.order.infrastructure.product.dto.ProductDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

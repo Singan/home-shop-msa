@@ -1,7 +1,7 @@
 package com.example.service.order.application.usecase;
 
-import com.example.service.member.MemberClient;
-import com.example.service.member.dto.MemberInfoDto;
+import com.example.service.order.infrastructure.member.MemberClient;
+import com.example.service.order.infrastructure.member.dto.MemberInfoDto;
 import com.example.service.order.application.OrderServiceFactory;
 import com.example.service.order.application.dto.request.OrderRequestDto;
 import com.example.service.order.application.dto.response.OrderPlaceResponseDto;
@@ -9,8 +9,8 @@ import com.example.service.order.domain.Order;
 import com.example.service.order.domain.OrderValidator;
 import com.example.service.order.domain.enums.OrderStatus;
 import com.example.service.order.domain.repository.OrderRepository;
-import com.example.service.product.ProductClient;
-import com.example.service.product.dto.ProductDetailDto;
+import com.example.service.order.infrastructure.product.ProductClient;
+import com.example.service.order.infrastructure.product.dto.ProductDetailDto;
 import com.example.service.order.infrastructure.repository.StockRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

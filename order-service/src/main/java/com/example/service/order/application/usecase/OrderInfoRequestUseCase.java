@@ -14,7 +14,7 @@ public class OrderInfoRequestUseCase {
     private final OrderRepository orderRepository;
 
     public OrderInfoToPaymentResponseDto orderInfoRequestToPayment(Long orderId, Long userId) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        Order order = orderRepository.findByIdAndPending(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
         if(order.getMemberId() != userId){
             throw new RuntimeException("요청자와 주문자가 일치하지 않습니다.");
         }
