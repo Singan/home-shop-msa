@@ -1,5 +1,7 @@
 package com.example.service.order.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class OrderException extends RuntimeException {
     private final ErrorCode errorCode;
 
@@ -10,6 +12,10 @@ public class OrderException extends RuntimeException {
 
     public int getStatusCode() {
         return errorCode.getStatusCode();
+    }
+
+    public HttpStatus getHttpStatus() {
+        return errorCode.getHttpStatus();
     }
 
     public String getStatusMessage() {
