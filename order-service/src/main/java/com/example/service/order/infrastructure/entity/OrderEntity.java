@@ -22,7 +22,6 @@ public class OrderEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private Integer quantity;
     private Integer totalPrice;
     private Long productId;
