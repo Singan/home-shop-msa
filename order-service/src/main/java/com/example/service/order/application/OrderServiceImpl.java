@@ -23,7 +23,10 @@ public class OrderServiceImpl implements OrderService {
     public OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId) {
 
         OrderPlaceResponseDto orderPlaceResponseDto =
-                orderRequestUseCase.placeOrder(OrderServiceFactory.createOrderRequestDto(orderRequest, userId));
+                orderRequestUseCase.placeOrder(
+                        OrderServiceFactory
+                        .createOrderRequestDto(orderRequest, userId)
+                );
 
         return OrderAPIFactory.creOrderPlaceResponse(orderPlaceResponseDto);
     }
