@@ -1,4 +1,4 @@
-package com.example.service.product.dto;
+package com.example.service.order.infrastructure.product.dto;
 
 public record ProductDetailDto(Long id,
                                Integer stock,

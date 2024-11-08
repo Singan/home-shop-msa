@@ -1,4 +1,4 @@
-package com.example.service.member.dto;
+package com.example.service.order.infrastructure.member.dto;
 
 public record MemberInfoDto(
         String name,
