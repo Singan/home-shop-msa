@@ -32,12 +32,6 @@ public class StockRepository {
         DefaultRedisScript<Long> script = new DefaultRedisScript<>(luaScript, Long.class);
         Long updatedStock = stringRedisTemplate.execute(script, Collections.singletonList(stockKey), quantity.toString());
 
-        if (updatedStock == null || updatedStock == -1) {
-            throw new IllegalStateException("재고 정보가 없습니다. productId=" + productId);
-        } else if (updatedStock == -2) {
-            throw new IllegalStateException("재고가 부족합니다. 요청 수량=" + quantity);
-        }
-
         log.info("재고 감소 완료: productId={}, 감소 수량={}, 남은 재고={}", productId, quantity, updatedStock);
         return updatedStock.intValue();
     }
