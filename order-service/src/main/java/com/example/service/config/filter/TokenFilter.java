@@ -4,15 +4,17 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class TokenFilter implements Filter {
 
-    private static final ThreadLocal<String> tokenHolder = new ThreadLocal<>();
+    private static final ThreadLocal<String> tokenHolder = new InheritableThreadLocal<>();
 
     public static String getToken() {
         return tokenHolder.get();

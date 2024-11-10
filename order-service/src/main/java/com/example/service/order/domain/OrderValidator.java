@@ -12,8 +12,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class OrderValidator {
     public boolean isValidOrder(ProductDetailDto product, OrderRequestDto orderRequest) {
-        return isProductOpen(product.openDateTime()) &&
-                hasSufficientStock(product.stock(), orderRequest.buyStock());
+        return isProductOpen(product.openDateTime());
     }
 
     private boolean isProductOpen(String openDateTime) {

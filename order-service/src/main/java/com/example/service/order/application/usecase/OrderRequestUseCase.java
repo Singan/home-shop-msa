@@ -1,7 +1,6 @@
 package com.example.service.order.application.usecase;
 
 import com.example.service.order.exception.*;
-import com.example.service.order.infrastructure.member.MemberClient;
 import com.example.service.order.infrastructure.member.dto.MemberInfoDto;
 import com.example.service.order.application.OrderServiceFactory;
 import com.example.service.order.application.dto.request.OrderRequestDto;
@@ -18,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -31,24 +31,28 @@ public class OrderRequestUseCase {
     private final MemberRepository memberRepository;
 
 
+
     public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
+
         // 상품 정보 조회
-        ProductDetailDto product = getProductDetails(orderRequestDto.productId());
+        CompletableFuture<ProductDetailDto> productFuture = getProductDetails(orderRequestDto.productId());
 
         // 사용자 정보 조회
-        MemberInfoDto member = getMemberProfile();
+        CompletableFuture<MemberInfoDto> memberFuture = getMemberProfile();
 
-        // 주문 유효성 검증
-        validateOrder(product, orderRequestDto);
+        //비동기 결과 검증
+        productFuture.thenAccept(product -> validateOrder(product, orderRequestDto));
 
-        // 캐싱된 재고 감소
-        if (stockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock()) < 0) {
-            throw new OrderStockOutOfException();
-        }
-        return saveOrder(orderRequestDto, product, member);
+        return productFuture.thenCombine(memberFuture, (product, member) -> {
+            if (stockRepository.decreaseStock(orderRequestDto.productId(), orderRequestDto.buyStock()) < 0) {
+                throw new OrderStockOutOfException();
+            }
+            // 주문 저장
+            return saveOrder(orderRequestDto, product, member);
+        }).join();
     }
 
-    private ProductDetailDto getProductDetails(Long productId) {
+    private CompletableFuture<ProductDetailDto> getProductDetails(Long productId) {
         try {
             return productRepository.getProductDetail(productId);
         } catch (Exception e) {
@@ -57,7 +61,7 @@ public class OrderRequestUseCase {
         }
     }
 
-    private MemberInfoDto getMemberProfile() {
+    private CompletableFuture<MemberInfoDto> getMemberProfile() {
         try {
             return memberRepository.getMemberProfile();
         } catch (Exception e) {
