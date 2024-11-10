@@ -10,15 +10,14 @@ import com.example.service.order.domain.Order;
 import com.example.service.order.domain.OrderValidator;
 import com.example.service.order.domain.enums.OrderStatus;
 import com.example.service.order.domain.repository.OrderRepository;
-import com.example.service.order.infrastructure.product.ProductClient;
 import com.example.service.order.infrastructure.product.dto.ProductDetailDto;
 import com.example.service.order.infrastructure.repository.MemberRepository;
 import com.example.service.order.infrastructure.repository.ProductRepository;
 import com.example.service.order.infrastructure.repository.StockRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +29,7 @@ public class OrderRequestUseCase {
     private final ProductRepository productRepository;
     private final StockRepository stockRepository;
     private final MemberRepository memberRepository;
+
 
     public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
         // 상품 정보 조회
@@ -52,7 +52,7 @@ public class OrderRequestUseCase {
         try {
             return productRepository.getProductDetail(productId);
         } catch (Exception e) {
-            log.info("Error Message : {} , productId = {} , exception = {}", e.getMessage(), productId,e.getClass().toString());
+            log.info("Error Message : {} , productId = {} , exception = {}", e.getMessage(), productId, e.getClass().toString());
             throw new OrderInvalidParameter();  // 상품 조회 실패시 예외
         }
     }
@@ -61,7 +61,7 @@ public class OrderRequestUseCase {
         try {
             return memberRepository.getMemberProfile();
         } catch (Exception e) {
-            log.info("Error Message : {} ,  exception = {}", e.getMessage(),e.getClass().toString());
+            log.info("Error Message : {} ,  exception = {}", e.getMessage(), e.getClass().toString());
             throw new OrderUnAuthorizedException();  // 사용자 정보 조회 실패시 예외
         }
     }
