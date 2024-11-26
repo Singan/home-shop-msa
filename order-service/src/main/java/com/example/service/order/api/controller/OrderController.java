@@ -15,8 +15,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public OrderPlaceResponse placeOrder(@RequestBody @Valid OrderRequest orderRequest, @RequestHeader("X-User-Id") Long userId) {
-        return orderService.placeOrder(orderRequest, userId);
+    public OrderPlaceResponse placeOrder(@RequestBody @Valid OrderRequest orderRequest, @RequestHeader("X-User-Id") Long userId,@RequestHeader("Authorization") String token) {
+        return orderService.placeOrder(orderRequest, userId,token);
     }
 
     @GetMapping("/{orderId}/payment-info")

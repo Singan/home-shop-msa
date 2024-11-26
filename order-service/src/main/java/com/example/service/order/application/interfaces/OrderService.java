@@ -6,7 +6,7 @@ import com.example.service.order.api.dto.response.OrderPlaceResponse;
 
 public interface OrderService {
 
-    OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId);
+    OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId,String token);
 
     OrderInfoToPaymentResponse orderDetail(Long orderId, Long userId);
 }

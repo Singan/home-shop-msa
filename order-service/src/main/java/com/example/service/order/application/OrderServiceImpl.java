@@ -20,12 +20,12 @@ public class OrderServiceImpl implements OrderService {
     private final OrderInfoRequestUseCase orderInfoRequestUseCase;
 
     @Override
-    public OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId) {
+    public OrderPlaceResponse placeOrder(OrderRequest orderRequest, Long userId, String token) {
 
         OrderPlaceResponseDto orderPlaceResponseDto =
                 orderRequestUseCase.placeOrder(
                         OrderServiceFactory
-                        .createOrderRequestDto(orderRequest, userId)
+                        .createOrderRequestDto(orderRequest, userId),token
                 );
 
         return OrderAPIFactory.creOrderPlaceResponse(orderPlaceResponseDto);

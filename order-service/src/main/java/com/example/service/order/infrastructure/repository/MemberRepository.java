@@ -15,8 +15,8 @@ public class MemberRepository {
     private final MemberClient memberClient;
 
     @Async
-    public CompletableFuture<MemberInfoDto> getMemberProfile() {
-        return CompletableFuture.completedFuture(memberClient.getMemberProfile());
+    public CompletableFuture<MemberInfoDto> getMemberProfile(String token) {
+        return CompletableFuture.completedFuture(memberClient.getMemberProfile(token));
     }
 
 }

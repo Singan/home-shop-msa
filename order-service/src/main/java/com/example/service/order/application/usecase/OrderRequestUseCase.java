@@ -16,6 +16,8 @@ import com.example.service.order.infrastructure.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -32,13 +34,12 @@ public class OrderRequestUseCase {
 
 
 
-    public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto) {
-
+    public OrderPlaceResponseDto placeOrder(OrderRequestDto orderRequestDto,String token) {
         // 상품 정보 조회
         CompletableFuture<ProductDetailDto> productFuture = getProductDetails(orderRequestDto.productId());
 
         // 사용자 정보 조회
-        CompletableFuture<MemberInfoDto> memberFuture = getMemberProfile();
+        CompletableFuture<MemberInfoDto> memberFuture = getMemberProfile(token);
 
         //비동기 결과 검증
         productFuture.thenAccept(product -> validateOrder(product, orderRequestDto));
@@ -61,9 +62,9 @@ public class OrderRequestUseCase {
         }
     }
 
-    private CompletableFuture<MemberInfoDto> getMemberProfile() {
+    private CompletableFuture<MemberInfoDto> getMemberProfile(String token) {
         try {
-            return memberRepository.getMemberProfile();
+            return memberRepository.getMemberProfile(token);
         } catch (Exception e) {
             log.info("Error Message : {} ,  exception = {}", e.getMessage(), e.getClass().toString());
             throw new OrderUnAuthorizedException();  // 사용자 정보 조회 실패시 예외
