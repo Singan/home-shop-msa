@@ -65,6 +65,13 @@ eureka:
     register-with-eureka: true
   instance:
     instance-id: ${spring.application.name}
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: "always"
 access:
   key: userkeyaccesskeyaldsnalksdnlkjasdfnlkasndlkfasnlkd
