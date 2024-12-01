@@ -55,7 +55,7 @@
             - 클러스터 환경에서 문제 발생하지 않음
     - InMemory DB로 속도가 빠른 레디스를 채택
 - 결제 완료 후 동시성 이슈
-      **주문 상태 Flow**
+  **주문 상태 Flow**
     ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/192fac3b-b6e5-4dac-96fb-18e9fd5394ed/image.png?table=block&id=14f9a382-c1a2-80b9-8048-c172a8b112e6&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=lmY0aC0zbfvVRp6yoh7p3e6IaDxyGu65gz_aaAm6vt4&downloadName=image.png)
     
     **AsIs**
