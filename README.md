@@ -1,4 +1,4 @@
-### 프로젝트 개요
+## 프로젝트 개요
 
 인원 : **1명(본인)**
 
@@ -20,13 +20,11 @@
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/be53300a-75a6-484e-9a07-01861f961c7b/image.png?table=block&id=1439a382-c1a2-80cc-a0fe-fd0f9d8a7b69&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=FFYb5rmcTausKNs_7PNKae68CW_T0NUbq7-5PTemQKM&downloadName=image.png)
 
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/83975f94-7cd1-46de-92f6-55995783f6d5/image.png?table=block&id=14f9a382-c1a2-8097-9d15-fc1d0ac52a10&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=1Nu3kr0vVa9L9wMdFQXD08hNZEvYFZ4EnrANF29vbWM&downloadName=image.png)
----
 
-### API 명세서
+## API 명세서
 
 [API 명세서](https://www.notion.so/13f9a382c1a2804896bbd94871f287d3?pvs=21)
 
----
 ## 의사결정 및 트러블슈팅
 <details>
         
@@ -89,9 +87,7 @@
 
 </details>
 
----
-
-### 서비스 별 기능
+## 서비스 별 기능
 
 1. API Gateway 를 통한 JWT 필터 및 각 서비스로 라우팅
 2. 그 외 서비스 끼리의 호출**(Feign Client)** 또한 Gateway 통과
@@ -102,8 +98,8 @@
 7. Payment-Service 에서 결제 요청 시 **대기 상태**의 Order를 가져와 결제 정보 저장 및 Order-Id 발행하여 Order-Status 변경 및 **ProductId:Stock** 메시지 발행하여 재고 감소
 
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/a860e0e5-52d6-4907-8b28-64e669f70b9e/image.png?table=block&id=14e9a382-c1a2-80eb-8776-fb1839fa47b0&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=D5GP9x2CYPj0GPD7Xdx_OigMOqbYyj2QtLr3X6PYQ7U&downloadName=image.png)
----
-### 서비스 별 역할
+
+## 서비스 별 역할
 
 - API Gateway
     - request를 각 서비스에 라우팅 시켜준다. (/서비스명/url)
