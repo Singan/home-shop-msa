@@ -36,9 +36,11 @@
     - **Kafka** 를 통해 결제 시 일시적으로 몰릴 수 있는 **재고 변동을 DB 부하**를 줄이기 위하여 **대규모 데이터 처리에 이점**을 가진 kafka 통하여 처리하도록 하였고 그 외 **UX 를 높이기 위해** 관심사 외의 작업을 메시지를 발행하여 처리
     - **Kafka** vs **RabbitMQ**
         - 휘발성 : 카프카는 메시지를 가져가더라도 EventStreamer 에 저장하여 재생 가능하지만 RabbitMQ는 삭제해 불가능
-    
-- **재고 관리 방식**
-    ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/fd9b22e0-7753-4c18-9a11-23cd45b574b1/image.png?table=block&id=14f9a382-c1a2-8056-b334-e6f260b7337a&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=cVp_dU2Vy-t-8O-NvxK5UNt9dVXfM7mz_Km_1ngBtQw&downloadName=image.png)
+
+<details>
+<summary> **재고 관리 방식** </summary> 
+
+![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/fd9b22e0-7753-4c18-9a11-23cd45b574b1/image.png?table=block&id=14f9a382-c1a2-8056-b334-e6f260b7337a&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=cVp_dU2Vy-t-8O-NvxK5UNt9dVXfM7mz_Km_1ngBtQw&downloadName=image.png)
     
     - **Redis** 를 통해 도메인 특성 상 구매 속도가 **빨라야하며 재고에 오류가 있어선 안된다** 생각하여 InMemory DB인 레디스를 선택하여 이를 통해 빠른 조회에 원자적 연산을 더불어 동시성 제어를 하였습니다.
     - 재고를 감소 한 후 감소한 값이 0 미만이라면 재고가 부족하다 판단하고 application 레벨에서 이를 체크하고 복구하는 로직으로 작성하였으나 감소한 시점에 또 다른 요청이 오면 해당 요청이 통과해야 하는 재고임에도 실패하는 문제 발생
@@ -54,10 +56,13 @@
             - Redisson 의 경우 pub,sub 형태로 락을 사용함
             - 클러스터 환경에서 문제 발생하지 않음
     - InMemory DB로 속도가 빠른 레디스를 채택
+</details>
 <details>
-<summary>- 결제 완료 후 동시성 이슈</summary>
-          **주문 상태 Flow**
-    ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/192fac3b-b6e5-4dac-96fb-18e9fd5394ed/image.png?table=block&id=14f9a382-c1a2-80b9-8048-c172a8b112e6&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=lmY0aC0zbfvVRp6yoh7p3e6IaDxyGu65gz_aaAm6vt4&downloadName=image.png)
+<summary>결제 완료 후 동시성 이슈</summary> 
+
+**주문 상태 Flow**
+        
+![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/192fac3b-b6e5-4dac-96fb-18e9fd5394ed/image.png?table=block&id=14f9a382-c1a2-80b9-8048-c172a8b112e6&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=lmY0aC0zbfvVRp6yoh7p3e6IaDxyGu65gz_aaAm6vt4&downloadName=image.png)
     
     **AsIs**
     
@@ -73,7 +78,8 @@
     - **UpdateAt 필드 확인을 통해** 값이 존재하면 상태 변경 X
     - 이로 인해 Order가 공유자원이 되어 DB 레벨의 쓰기 락을 통해 해결
 
-<details>
+</details>
+
 ---
 
 ### 서비스 별 기능
