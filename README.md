@@ -30,9 +30,10 @@
 <details>
         
 <summary><b>결제 완료 후 재고 감소 및 주문 상태 변경 로직</b></summary>
-        
+<br>
+
 ***재고 반영 Flow***
-    
+
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/25602d61-fe41-4900-b55e-15b98681b35b/image.png?table=block&id=14f9a382-c1a2-8004-bc89-fc282b394a08&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=2mL_75NGZD-Avn9p_NSoLIK66dkxcYrHkiE8yn6ogA0&downloadName=image.png)
     
 - **Kafka** 를 통해 결제 시 일시적으로 몰릴 수 있는 **재고 변동을 DB 부하**를 줄이기 위하여 **대규모 데이터 처리에 이점**을 가진 kafka 통하여 처리하도록 하였고 그 외 **UX 를 높이기 위해** 관심사 외의 작업을 메시지를 발행하여 처리
@@ -43,6 +44,7 @@
 
 <details>
 <summary><b>재고 관리 방식</b></b></summary> 
+<br>
 
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/fd9b22e0-7753-4c18-9a11-23cd45b574b1/image.png?table=block&id=14f9a382-c1a2-8056-b334-e6f260b7337a&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=cVp_dU2Vy-t-8O-NvxK5UNt9dVXfM7mz_Km_1ngBtQw&downloadName=image.png)
     
@@ -64,6 +66,7 @@
 
 <details>
 <summary><b>결제 완료 후 동시성 이슈</b></summary> 
+<br>
 
 **주문 상태 Flow**
         
