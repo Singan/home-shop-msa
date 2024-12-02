@@ -27,7 +27,7 @@
 [API 명세서](https://www.notion.so/13f9a382c1a2804896bbd94871f287d3?pvs=21)
 
 ---
-### 의사결정 및 트러블슈팅
+## 의사결정 및 트러블슈팅
 <details>
         
 <summary><b>결제 완료 후 재고 감소 및 주문 상태 변경 로직</b></summary>
