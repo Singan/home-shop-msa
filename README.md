@@ -25,7 +25,7 @@
 [API 명세서](https://www.notion.so/13f9a382c1a2804896bbd94871f287d3?pvs=21)
 
 
-## 서비스 별 기능
+## 핵심 기능 FlOW
 
 1. API Gateway 를 통한 JWT 필터 및 각 서비스로 라우팅
 2. 그 외 서비스 끼리의 호출 **(Feign Client)** 또한 Gateway 통과
