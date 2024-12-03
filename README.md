@@ -19,7 +19,7 @@
 
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/be53300a-75a6-484e-9a07-01861f961c7b/image.png?table=block&id=1439a382-c1a2-80cc-a0fe-fd0f9d8a7b69&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=FFYb5rmcTausKNs_7PNKae68CW_T0NUbq7-5PTemQKM&downloadName=image.png)
 
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/83975f94-7cd1-46de-92f6-55995783f6d5/image.png?table=block&id=14f9a382-c1a2-8097-9d15-fc1d0ac52a10&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=1Nu3kr0vVa9L9wMdFQXD08hNZEvYFZ4EnrANF29vbWM&downloadName=image.png)
+
 
 ## API 명세서
 
@@ -31,12 +31,14 @@
 <summary><b>결제 완료 후 재고 감소 및 주문 상태 변경 로직</b></summary>
 <br>
 
-***재고 반영 Flow***
+***결제 완료 Flow***<br>
+![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/83975f94-7cd1-46de-92f6-55995783f6d5/image.png?table=block&id=14f9a382-c1a2-8097-9d15-fc1d0ac52a10&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=1Nu3kr0vVa9L9wMdFQXD08hNZEvYFZ4EnrANF29vbWM&downloadName=image.png)
 
+***재고 반영 Flow***<br>
 ![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/25602d61-fe41-4900-b55e-15b98681b35b/image.png?table=block&id=14f9a382-c1a2-8004-bc89-fc282b394a08&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=2mL_75NGZD-Avn9p_NSoLIK66dkxcYrHkiE8yn6ogA0&downloadName=image.png)
     
 - 결제 시 일시적으로 몰릴 수 있는 **재고 변동을 DB 부하**를 줄이기 위하여 **대규모 데이터 처리에 이점**을 가진 **kafka** 통하여 처리하도록 하였고 그 외 **UX 를 높이기 위해** 관심사 외의 작업을 메시지를 발행하여 처리
-- **Kafka** vs **RabbitMQ**
+- **Kafka** vs RabbitMQ : 대용량 데이터와 실시간 스트리밍에 안정적인 **Kafka** 선택
 - 휘발성 : Kafka는 메시지를 가져가더라도 EventStreamer 에 저장하여 재생 가능하지만 RabbitMQ는 삭제해 불가능
 - 실시간 스트리밍 : 대규모 실시간 스트리밍에서 Kafka는 RabbitMQ에 비해 우위를 가짐
 - 응답 속도 : RabbitMQ는 낮은 지연 시간과 빠른 응답성으로 실시간 요청-응답 기반 애플리케이션에 최적화
@@ -54,14 +56,15 @@
 - **루아스크립트** vs 분산 락
   - 루아스크립트
     - 레디스 내에서 로직이 가능
-      - 이를 통해 원자적 연산으로 다른 클라이언트의 개입을 봉쇄하여 경쟁 상태 방지
-      - 서버에서의 로직이 필요한 경우는 사용 불가
-      - 클러스터 환경에서 문제 발생
-      - 성능적으로 더 우수한 루아스크립트 선택
-- 분산 락
-  - 레디스에서 값을 가져와서 사용하는 로직의 형태로 이용 가능
-  - Redisson 의 경우 pub,sub 형태로 락을 사용함
-  - 클러스터 환경에서 문제 발생하지 않음
+    - 이를 통해 원자적 연산으로 다른 클라이언트의 개입을 봉쇄하여 경쟁 상태 방지
+    - 서버에서의 로직이 필요한 경우는 사용 불가
+    - 클러스터 환경에서 문제 발생
+    - 성능적으로 더 우수한 루아스크립트 선택
+
+  - 분산 락
+    - 레디스에서 값을 가져와서 사용하는 로직의 형태로 이용 가능
+    - Redisson 의 경우 pub,sub 형태로 락을 사용함
+    - 클러스터 환경에서 문제 발생하지 않음
 </details>
 
 <details>
@@ -87,11 +90,28 @@
  - 이로 인해 Order가 공유자원이 되어 DB 레벨의 쓰기 락을 통해 해결
 
 </details>
+<details>
+        <summary><b>가상 스레드를 적용하여 주문 API 성능 개선</b></summary>
+        <br>
+        
+**성능 개선 상세** : [부하테스트 기록](https://www.notion.so/1429a382c1a280e884bcfbb793ecaaad?pvs=21) 
+| **버전** | **주요 변경 사항** | **TPS** | **TPS 변화량** | **증감률** |
+| --- | --- | --- | --- | --- |
+| Version 0 (조정 전) | 기본 설정 | 180 | - | - |
+| Version 0 (조정 후) | 커넥션 풀 최적화 | 220 | +40 | +22.22% |
+| Version 1 | Feign 요청 비동기 처리 | 138 | -42 | -23.33% |
+| Version 2 | 스레드 풀 크기 500으로 조정 | 229 | +49 | +27.22% |
+| Version 3 | 비동기 Task 가상 스레드 변경 | 130.5 | -49.5 | -27.50% |
+| Version 3.5 | MariaDB Driver 및 가상 스레드 비동기 요청 처리 | 265 | +85 | +47.22% |
+| Version 4 | 톰캣 스레드 가상 스레드 전환, ThreadLocal 제거 | 262 | +82 | +45.56% |
+
+최종적으로 **Version 3.5**를 적용하여 TPS **180 → 265**로 **47.22% 성능 향상**을 달성
+</details>
 
 ## 서비스 별 기능
 
 1. API Gateway 를 통한 JWT 필터 및 각 서비스로 라우팅
-2. 그 외 서비스 끼리의 호출**(Feign Client)** 또한 Gateway 통과
+2. 그 외 서비스 끼리의 호출 **(Feign Client)** 또한 Gateway 통과
 3. API Gateway 요청 시 Token 전달을 위해 Filter 에서 Thread Local 을 통해 **토큰 저장 및 전달**
 4. Member-Service 로그인 시 에서 엑세스 및 리프레쉬 **토큰 제공**
 5. Product-Service 에서 kafka 로 발행된 메시지 컨슘하여 **재고 DB 감소**
