@@ -118,7 +118,7 @@
 6. Order-Service 에서 주문 요청 시 Member 와 Product 정보 **비동기 호출**하여 주문 저장
 7. Payment-Service 에서 결제 요청 시 **대기 상태**의 Order를 가져와 결제 정보 저장 및 Order-Id 발행하여 Order-Status 변경 및 **ProductId:Stock** 메시지 발행하여 재고 감소
 
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/a860e0e5-52d6-4907-8b28-64e669f70b9e/image.png?table=block&id=14e9a382-c1a2-80eb-8776-fb1839fa47b0&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=D5GP9x2CYPj0GPD7Xdx_OigMOqbYyj2QtLr3X6PYQ7U&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fa860e0e5-52d6-4907-8b28-64e669f70b9e%2Fimage.png/size/w=2000?exp=1733319691&sig=bzZTPLcp4bQgeSZjmf85fjgwvDg6yFc2-V5QPhuo08U)
 
 ## 서비스 별 역할
 
