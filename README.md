@@ -17,7 +17,7 @@
 - Spring Cloud Gateway , Eureka , Eureka-client , Spring kafka , Spring Data Redis , Spring Data JPA, Feign Client
 - nGrinder , PostMan , Docker Compose
 
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/be53300a-75a6-484e-9a07-01861f961c7b/image.png?table=block&id=1439a382-c1a2-80cc-a0fe-fd0f9d8a7b69&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=FFYb5rmcTausKNs_7PNKae68CW_T0NUbq7-5PTemQKM&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fbe53300a-75a6-484e-9a07-01861f961c7b%2Fimage.png/size/w=2000?exp=1733319372&sig=PNewQY4n91TJn5DA8qJ-OOG_FyI72JDPJjHRswYJ6Qc)
 
 
 
@@ -32,10 +32,10 @@
 <br>
 
 ***결제 완료 Flow***<br>
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/83975f94-7cd1-46de-92f6-55995783f6d5/image.png?table=block&id=14f9a382-c1a2-8097-9d15-fc1d0ac52a10&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=1Nu3kr0vVa9L9wMdFQXD08hNZEvYFZ4EnrANF29vbWM&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F83975f94-7cd1-46de-92f6-55995783f6d5%2Fimage.png/size/w=2000?exp=1733319508&sig=xmV3AjhRP18dgW-nC23hEZ63B_4Znny-E0bG-szqwTI)
 
 ***재고 반영 Flow***<br>
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/25602d61-fe41-4900-b55e-15b98681b35b/image.png?table=block&id=14f9a382-c1a2-8004-bc89-fc282b394a08&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=2mL_75NGZD-Avn9p_NSoLIK66dkxcYrHkiE8yn6ogA0&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F25602d61-fe41-4900-b55e-15b98681b35b%2Fimage.png/size/w=2000?exp=1733319540&sig=vnhfy5zAn6iJK9HLsAr8Xv-7jTm_iYYDRN9Ml1DJYIs)
     
 - 결제 시 일시적으로 몰릴 수 있는 **재고 변동을 DB 부하**를 줄이기 위하여 **대규모 데이터 처리에 이점**을 가진 **kafka** 통하여 처리하도록 하였고 그 외 **UX 를 높이기 위해** 관심사 외의 작업을 메시지를 발행하여 처리
 - **Kafka** vs RabbitMQ : 대용량 데이터와 실시간 스트리밍에 안정적인 **Kafka** 선택
@@ -49,7 +49,7 @@
 <summary><b>재고 관리 방식</b></b></summary> 
 <br>
 
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/fd9b22e0-7753-4c18-9a11-23cd45b574b1/image.png?table=block&id=14f9a382-c1a2-8056-b334-e6f260b7337a&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=cVp_dU2Vy-t-8O-NvxK5UNt9dVXfM7mz_Km_1ngBtQw&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Ffd9b22e0-7753-4c18-9a11-23cd45b574b1%2Fimage.png/size/w=2000?exp=1733319572&sig=KfCTMqtcUPzccXN5qnFjnSnxuxG47ac-WhnI4YLjpnA)
     
 - **Redis** 를 통해 도메인 특성 상 구매 속도가 **빨라야하며 재고에 오류가 있어선 안된다** 생각하여 InMemory DB인 레디스를 선택하여 이를 통해 빠른 조회에 **원자적 연산**으로 동시성 제어
 - 재고를 감소 한 후 감소한 값이 0 미만이라면 재고가 부족하다 판단하고 application 레벨에서 이를 체크하고 복구하는 로직으로 작성하였으나 감소한 시점에 또 다른 요청이 오면 해당 요청이 통과해야 하는 재고임에도 실패하는 문제 발생
@@ -73,7 +73,7 @@
 
 **주문 상태 Flow**
         
-![image.png](https://file.notion.so/f/f/04134d59-90bb-48a2-b600-8335846e6312/192fac3b-b6e5-4dac-96fb-18e9fd5394ed/image.png?table=block&id=14f9a382-c1a2-80b9-8048-c172a8b112e6&spaceId=04134d59-90bb-48a2-b600-8335846e6312&expirationTimestamp=1733140800000&signature=lmY0aC0zbfvVRp6yoh7p3e6IaDxyGu65gz_aaAm6vt4&downloadName=image.png)
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F192fac3b-b6e5-4dac-96fb-18e9fd5394ed%2Fimage.png/size/w=2000?exp=1733319600&sig=oJWM3FIv7GIo0f82Knbp0b2E07u876DtpKa2weAvuSk)
     
 **AsIs**
     
@@ -94,7 +94,7 @@
         <summary><b>가상 스레드를 적용하여 주문 API 성능 개선</b></summary>
         <br>
         
-**성능 개선 상세** : [부하테스트 기록](https://www.notion.so/1429a382c1a280e884bcfbb793ecaaad?pvs=21) 
+**성능 개선 상세** : [부하테스트 기록](https://desert-elk-95d.notion.site/1429a382c1a280e884bcfbb793ecaaad?pvs=4) 
 | **버전** | **주요 변경 사항** | **TPS** | **TPS 변화량** | **증감률** |
 | --- | --- | --- | --- | --- |
 | Version 0 (조정 전) | 기본 설정 | 180 | - | - |
