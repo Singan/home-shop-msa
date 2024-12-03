@@ -20,10 +20,45 @@
 ![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fbe53300a-75a6-484e-9a07-01861f961c7b%2Fimage.png/size/w=2000?exp=1733319372&sig=PNewQY4n91TJn5DA8qJ-OOG_FyI72JDPJjHRswYJ6Qc)
 
 
-
 ## API 명세서
 
 [API 명세서](https://www.notion.so/13f9a382c1a2804896bbd94871f287d3?pvs=21)
+
+
+## 서비스 별 기능
+
+1. API Gateway 를 통한 JWT 필터 및 각 서비스로 라우팅
+2. 그 외 서비스 끼리의 호출 **(Feign Client)** 또한 Gateway 통과
+3. API Gateway 요청 시 Token 전달을 위해 Filter 에서 Thread Local 을 통해 **토큰 저장 및 전달**
+4. Member-Service 로그인 시 에서 엑세스 및 리프레쉬 **토큰 제공**
+5. Product-Service 에서 kafka 로 발행된 메시지 컨슘하여 **재고 DB 감소**
+6. Order-Service 에서 주문 요청 시 Member 와 Product 정보 **비동기 호출**하여 주문 저장
+7. Payment-Service 에서 결제 요청 시 **대기 상태**의 Order를 가져와 결제 정보 저장 및 Order-Id 발행하여 Order-Status 변경 및 **ProductId:Stock** 메시지 발행하여 재고 감소
+
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fa860e0e5-52d6-4907-8b28-64e669f70b9e%2Fimage.png/size/w=2000?exp=1733319691&sig=bzZTPLcp4bQgeSZjmf85fjgwvDg6yFc2-V5QPhuo08U)
+
+## 서비스 별 역할
+
+- API Gateway
+    - request를 각 서비스에 라우팅 시켜준다. (/서비스명/url)
+    - JWT 토큰의 필터링을 한다.
+- Member-Service
+    - 회원 가입
+    - 로그인 토큰 발행
+    - 이메일 확인 코드 전송
+    - 이메일 확인 코드 검증
+- Product-Service
+    - 상품 목록 조회
+    - 상품 상세 조회
+    - 재고 감소 메시지 소모
+- Order-Service
+    - 주문 및 재고 감소
+    - 주문 정보 API
+    - 주문 상태 변경 메시지 발행
+- Payment-Service
+    - 결제 검증 및 저장
+    - 주문 상태 변경 메시지 발행
+    - 재고 감소 메시지 발행
 
 ## 의사결정 및 트러블슈팅
 <details>
@@ -107,38 +142,3 @@
 
 최종적으로 **Version 3.5**를 적용하여 TPS **180 → 265**로 **47.22% 성능 향상**을 달성
 </details>
-
-## 서비스 별 기능
-
-1. API Gateway 를 통한 JWT 필터 및 각 서비스로 라우팅
-2. 그 외 서비스 끼리의 호출 **(Feign Client)** 또한 Gateway 통과
-3. API Gateway 요청 시 Token 전달을 위해 Filter 에서 Thread Local 을 통해 **토큰 저장 및 전달**
-4. Member-Service 로그인 시 에서 엑세스 및 리프레쉬 **토큰 제공**
-5. Product-Service 에서 kafka 로 발행된 메시지 컨슘하여 **재고 DB 감소**
-6. Order-Service 에서 주문 요청 시 Member 와 Product 정보 **비동기 호출**하여 주문 저장
-7. Payment-Service 에서 결제 요청 시 **대기 상태**의 Order를 가져와 결제 정보 저장 및 Order-Id 발행하여 Order-Status 변경 및 **ProductId:Stock** 메시지 발행하여 재고 감소
-
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fa860e0e5-52d6-4907-8b28-64e669f70b9e%2Fimage.png/size/w=2000?exp=1733319691&sig=bzZTPLcp4bQgeSZjmf85fjgwvDg6yFc2-V5QPhuo08U)
-
-## 서비스 별 역할
-
-- API Gateway
-    - request를 각 서비스에 라우팅 시켜준다. (/서비스명/url)
-    - JWT 토큰의 필터링을 한다.
-- Member-Service
-    - 회원 가입
-    - 로그인 토큰 발행
-    - 이메일 확인 코드 전송
-    - 이메일 확인 코드 검증
-- Product-Service
-    - 상품 목록 조회
-    - 상품 상세 조회
-    - 재고 감소 메시지 소모
-- Order-Service
-    - 주문 및 재고 감소
-    - 주문 정보 API
-    - 주문 상태 변경 메시지 발행
-- Payment-Service
-    - 결제 검증 및 저장
-    - 주문 상태 변경 메시지 발행
-    - 재고 감소 메시지 발행
