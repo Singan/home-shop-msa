@@ -7,13 +7,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.concurrent.CompletableFuture;
+
 @Repository
 @RequiredArgsConstructor
 public class MemberRepository {
     private final MemberClient memberClient;
 
-    public MemberInfoDto getMemberProfile(){
-        return memberClient.getMemberProfile();
-    };
+    @Async
+    public CompletableFuture<MemberInfoDto> getMemberProfile() {
+        return CompletableFuture.completedFuture(memberClient.getMemberProfile());
+    }
 
 }

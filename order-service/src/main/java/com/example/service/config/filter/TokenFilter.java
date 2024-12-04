@@ -4,15 +4,18 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class TokenFilter implements Filter {
 
-    private static final ThreadLocal<String> tokenHolder = new ThreadLocal<>();
+    private static final ThreadLocal<String> tokenHolder = new InheritableThreadLocal<>();
 
     public static String getToken() {
         return tokenHolder.get();
@@ -25,7 +28,6 @@ public class TokenFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String token = httpRequest.getHeader("Authorization");
 

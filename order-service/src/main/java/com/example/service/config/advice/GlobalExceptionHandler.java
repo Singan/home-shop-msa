@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(OrderException.class)
     public ResponseEntity<String> handleOrderException(OrderException ex) {
-        log.info(ex.getMessage());
-        return new ResponseEntity<>(ex.getMessage(), ex.getHttpStatus());
+        log.error(ex.getMessage());
+        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception ex) {
