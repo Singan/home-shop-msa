@@ -17,7 +17,7 @@
 - Spring Cloud Gateway , Eureka , Eureka-client , Spring kafka , Spring Data Redis , Spring Data JPA, Feign Client
 - nGrinder , PostMan , Docker Compose
 
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fbe53300a-75a6-484e-9a07-01861f961c7b%2Fimage.png/size/w=2000?exp=1733319372&sig=PNewQY4n91TJn5DA8qJ-OOG_FyI72JDPJjHRswYJ6Qc)
+![프로젝트 아키텍처](https://github.com/user-attachments/assets/7fa37491-b6d9-4d7e-8afb-2f3f27eda3c7)
 
 
 ## API 명세서
@@ -35,7 +35,8 @@
 6. Order-Service 에서 주문 요청 시 Member 와 Product 정보 **비동기 호출**하여 주문 저장
 7. Payment-Service 에서 결제 요청 시 **대기 상태**의 Order를 가져와 결제 정보 저장 및 Order-Id 발행하여 Order-Status 변경 및 **ProductId:Stock** 메시지 발행하여 재고 감소
 
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Fa860e0e5-52d6-4907-8b28-64e669f70b9e%2Fimage.png/size/w=2000?exp=1733319691&sig=bzZTPLcp4bQgeSZjmf85fjgwvDg6yFc2-V5QPhuo08U)
+![전체 FLOW](https://github.com/user-attachments/assets/38d2b8dd-8860-4c08-abc2-4fdfd6585746)
+
 
 ## 서비스 별 역할
 
@@ -67,10 +68,12 @@
 <br>
 
 ***결제 완료 Flow***<br>
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F83975f94-7cd1-46de-92f6-55995783f6d5%2Fimage.png/size/w=2000?exp=1733319508&sig=xmV3AjhRP18dgW-nC23hEZ63B_4Znny-E0bG-szqwTI)
+![결제 완료 FLOW](https://github.com/user-attachments/assets/d23a24a7-b2a7-4996-839c-697854b09744)
+
 
 ***재고 반영 Flow***<br>
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F25602d61-fe41-4900-b55e-15b98681b35b%2Fimage.png/size/w=2000?exp=1733319540&sig=vnhfy5zAn6iJK9HLsAr8Xv-7jTm_iYYDRN9Ml1DJYIs)
+![재고 DB 반영 FLOW](https://github.com/user-attachments/assets/b54ce317-0766-4d7b-8acd-21b41d6306cc)
+
     
 - 결제 시 일시적으로 몰릴 수 있는 **재고 변동을 DB 부하**를 줄이기 위하여 **대규모 데이터 처리에 이점**을 가진 **kafka** 통하여 처리하도록 하였고 그 외 **UX 를 높이기 위해** 관심사 외의 작업을 메시지를 발행하여 처리
 - **Kafka** vs RabbitMQ : 대용량 데이터와 실시간 스트리밍에 안정적인 **Kafka** 선택
@@ -84,7 +87,8 @@
 <summary><b>재고 관리 방식</b></b></summary> 
 <br>
 
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2Ffd9b22e0-7753-4c18-9a11-23cd45b574b1%2Fimage.png/size/w=2000?exp=1733319572&sig=KfCTMqtcUPzccXN5qnFjnSnxuxG47ac-WhnI4YLjpnA)
+![재고 관리 방식](https://github.com/user-attachments/assets/37b03943-ad29-4a99-9235-d7c1812c69af)
+
     
 - **Redis** 를 통해 도메인 특성 상 구매 속도가 **빨라야하며 재고에 오류가 있어선 안된다** 생각하여 InMemory DB인 레디스를 선택하여 이를 통해 빠른 조회에 **원자적 연산**으로 동시성 제어
 - 재고를 감소 한 후 감소한 값이 0 미만이라면 재고가 부족하다 판단하고 application 레벨에서 이를 체크하고 복구하는 로직으로 작성하였으나 감소한 시점에 또 다른 요청이 오면 해당 요청이 통과해야 하는 재고임에도 실패하는 문제 발생
@@ -108,7 +112,8 @@
 
 **주문 상태 Flow**
         
-![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F04134d59-90bb-48a2-b600-8335846e6312%2F192fac3b-b6e5-4dac-96fb-18e9fd5394ed%2Fimage.png/size/w=2000?exp=1733319600&sig=oJWM3FIv7GIo0f82Knbp0b2E07u876DtpKa2weAvuSk)
+![image](https://github.com/user-attachments/assets/5d9c5ba4-6092-4c13-8ac6-b5c7582ef252)
+
     
 **AsIs**
     
