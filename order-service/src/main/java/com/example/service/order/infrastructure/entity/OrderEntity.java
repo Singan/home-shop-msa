@@ -5,6 +5,7 @@ import com.example.service.order.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
@@ -30,6 +31,9 @@ public class OrderEntity implements Serializable {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
 
@@ -37,6 +41,7 @@ public class OrderEntity implements Serializable {
     public Order toOrder() {
         return Order.builder()
                 .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .id(id)
                 .memberId(memberId)
                 .productId(productId)
@@ -53,6 +58,7 @@ public class OrderEntity implements Serializable {
                 .productId(order.getProductId())
                 .quantity(order.getQuantity())
                 .totalPrice(order.getTotalPrice())
+                .updatedAt(order.getUpdatedAt())
                 .status(order.getStatus())
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.example.service.payment.infrastructure.order;
 
+import com.example.service.payment.infrastructure.order.dto.OrderStatusConfirmDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Repository;
@@ -7,11 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class OrderKafkaProducer {
-    private final KafkaTemplate<String, Long> kafkaTemplate;
+    private final KafkaTemplate<String, OrderStatusConfirmDto> kafkaTemplate;
 
 
-    public void sendOrder(Long orderId) {
-        kafkaTemplate.send("order-status-topic", orderId);
+    public void sendOrder(Long orderId, boolean confirm) {
+        kafkaTemplate.send("order-status-topic", String.valueOf(orderId), new OrderStatusConfirmDto(orderId, confirm));
     }
 
 }

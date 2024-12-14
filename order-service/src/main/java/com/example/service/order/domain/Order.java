@@ -26,10 +26,16 @@ public class Order {
     private Long memberId;
     @NotNull
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private OrderStatus status;
 
 
-    public void orderConfirm() {
-        status = OrderStatus.CONFIRM;
+    public boolean orderConfirm(boolean confirm) {
+        if (confirm) {
+            status = OrderStatus.CONFIRM;
+        }else{
+            status = OrderStatus.CANCELLED;
+        }
+        return confirm;
     }
 }

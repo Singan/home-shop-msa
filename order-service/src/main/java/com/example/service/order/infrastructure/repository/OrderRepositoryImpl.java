@@ -8,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Repository
@@ -25,7 +27,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public List<Order> findAll(Long userId, Pageable pageable) {
+    public List<Order> findAllMemberId(Long userId, Pageable pageable) {
         return orderJpaRepository.
                 findAllByMemberId(userId, pageable)
                 .map(OrderEntity::toOrder)
@@ -41,4 +43,15 @@ public class OrderRepositoryImpl implements OrderRepository {
     public Optional<Order> findByIdAndPending(Long id) {
         return orderJpaRepository.findByIdAndStatus(id, OrderStatus.PENDING).map(OrderEntity::toOrder);
     }
+
+    @Override
+    public List<Order> findPendingOrdersOlderThan10Minutes(LocalDateTime time) {
+        LocalDateTime tenMinutesAgo = time.minusMinutes(10);
+
+        return orderJpaRepository.findByStatusAndCreatedAtBefore(OrderStatus.PENDING, tenMinutesAgo)
+                .stream()
+                .map(OrderEntity::toOrder)
+                .collect(Collectors.toList());
+    }
+
 }

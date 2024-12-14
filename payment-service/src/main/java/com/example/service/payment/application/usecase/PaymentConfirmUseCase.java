@@ -62,7 +62,7 @@ public class PaymentConfirmUseCase {
 
         if (paymentStatus.equals(PaymentStatus.success)) { // 성공 했다면 재고 차감을 위해 메시지를 발행한다.
             sendStockDecreaseMessage(orderInfoDto);
-            orderKafkaProducer.sendOrder(orderInfoDto.getOrderId()); // Order 도 업데이트 해준다.
+            orderKafkaProducer.sendOrder(orderInfoDto.getOrderId() , true); // Order 도 업데이트 해준다.
         }
 
 

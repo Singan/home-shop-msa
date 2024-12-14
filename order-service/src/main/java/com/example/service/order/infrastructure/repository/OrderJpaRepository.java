@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderJpaRepository extends JpaRepository<OrderEntity, Long> {
@@ -13,4 +15,6 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity, Long> {
     Page<OrderEntity> findAllByMemberId(Long customerId , Pageable pageable);
 
     Optional<OrderEntity> findByIdAndStatus(Long orderId , OrderStatus status);
+
+    List<OrderEntity> findByStatusAndCreatedAtBefore(OrderStatus status, LocalDateTime tenMinutesAgo);
 }
