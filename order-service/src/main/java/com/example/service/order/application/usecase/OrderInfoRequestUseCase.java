@@ -18,7 +18,7 @@ public class OrderInfoRequestUseCase {
 
     public OrderInfoToPaymentResponseDto orderInfoRequestToPayment(Long orderId, Long userId) {
         Order order = orderRepository.findByIdAndPending(orderId).orElseThrow(OrderNotFoundException::new);
-        if(order.getMemberId().equals(userId)){
+        if(!order.getMemberId().equals(userId)){
             throw new OrderUnAuthorizedException();
         }
 

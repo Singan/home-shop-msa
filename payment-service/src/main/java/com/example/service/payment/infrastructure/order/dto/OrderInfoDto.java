@@ -15,4 +15,5 @@ public class OrderInfoDto {
     private Long orderId;
     private LocalDateTime orderTime;
     private String orderStatus;
+    private Integer orderPrice;
 }

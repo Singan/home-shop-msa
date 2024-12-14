@@ -52,11 +52,9 @@ public class PaymentConfirmUseCase {
     @Transactional
     public PaymentConfirmResponseDto paymentConfirm(PaymentConfirmRequestDto paymentConfirmRequestDto) {
 
-
         OrderInfoDto orderInfoDto = orderClient.getOrderInfo(paymentConfirmRequestDto.orderId()); // 오더 조회
 
         validateOrderTime(orderInfoDto.getOrderTime());
-
 
         PaymentStatus paymentStatus = paymentGateSendConfirm(); // PG 사 요청 성공 여부
 
@@ -69,7 +67,7 @@ public class PaymentConfirmUseCase {
         Payment payment = Payment.builder()
                 .orderId(paymentConfirmRequestDto.orderId())
                 .status(paymentStatus)
-                .price(paymentConfirmRequestDto.price())
+                .price(orderInfoDto.getOrderPrice())
                 .build();
 
         payment = paymentRepository.save(payment);

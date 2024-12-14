@@ -41,7 +41,8 @@ public class OrderServiceFactory {
                 order.getMemberId(),
                 order.getQuantity(),
                 order.getCreatedAt(),
-                order.getStatus()
+                order.getStatus(),
+                order.getTotalPrice()
         );
     }
 }

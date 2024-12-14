@@ -9,5 +9,7 @@ public record OrderInfoToPaymentResponse(
         Long orderId,
         Integer quantity,
         LocalDateTime orderTime,
-        OrderStatus orderStatus) {
+        OrderStatus orderStatus,
+        Integer orderPrice
+) {
 }
