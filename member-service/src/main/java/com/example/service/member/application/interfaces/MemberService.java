@@ -6,8 +6,6 @@ import com.example.service.member.api.dto.request.MemberSignUpRequest;
 import com.example.service.member.api.dto.request.SendEmailRequest;
 import com.example.service.member.api.dto.response.MemberInfoResponse;
 import com.example.service.member.api.dto.response.MemberLoginResponse;
-import com.example.service.member.application.dto.response.MemberInfoDto;
-import com.example.service.member.application.dto.response.MemberTokensDto;
 
 public interface MemberService {
 

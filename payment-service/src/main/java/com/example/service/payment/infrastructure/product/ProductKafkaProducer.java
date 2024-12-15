@@ -1,6 +1,5 @@
 package com.example.service.payment.infrastructure.product;
 
-import com.example.service.payment.infrastructure.order.dto.OrderInfoDto;
 import com.example.service.payment.infrastructure.product.dto.StockDecreaseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;

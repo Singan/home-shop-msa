@@ -1,6 +1,5 @@
 package com.example.config;
 
-import com.example.service.product.application.dto.cache.ProductDetailCacheDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;

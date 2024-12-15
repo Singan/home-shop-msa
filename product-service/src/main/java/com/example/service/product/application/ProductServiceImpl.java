@@ -6,7 +6,6 @@ import com.example.service.product.api.dto.request.ProductPageRequest;
 import com.example.service.product.api.dto.response.ProductDetailResponse;
 import com.example.service.product.api.dto.response.ProductListResponse;
 import com.example.service.product.application.dto.response.ProductListDto;
-import com.example.service.product.application.dto.response.ProductListItemDto;
 import com.example.service.product.application.interfaces.ProductService;
 import com.example.service.product.application.usecase.ProductDetailUseCase;
 import com.example.service.product.application.usecase.ProductListUseCase;

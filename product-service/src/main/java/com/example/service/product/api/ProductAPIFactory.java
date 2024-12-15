@@ -6,7 +6,6 @@ import com.example.service.product.api.dto.response.ProductListResponse;
 import com.example.service.product.application.dto.response.ProductDetailDto;
 import com.example.service.product.application.dto.response.ProductListDto;
 import com.example.service.product.application.dto.response.ProductListItemDto;
-import com.example.service.product.domain.Product;
 
 public class ProductAPIFactory {
 

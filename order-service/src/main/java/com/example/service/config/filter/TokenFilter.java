@@ -1,13 +1,11 @@
 package com.example.service.config.filter;
 
 import feign.RequestInterceptor;
-import feign.RequestTemplate;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.io.IOException;
 

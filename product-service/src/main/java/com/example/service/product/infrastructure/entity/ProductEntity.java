@@ -2,7 +2,6 @@ package com.example.service.product.infrastructure.entity;
 
 import com.example.service.product.domain.Product;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

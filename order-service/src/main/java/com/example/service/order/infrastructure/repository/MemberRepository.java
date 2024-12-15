@@ -5,7 +5,6 @@ import com.example.service.order.infrastructure.member.dto.MemberInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.concurrent.CompletableFuture;
 

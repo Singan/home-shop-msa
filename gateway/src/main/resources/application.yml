@@ -7,18 +7,13 @@ spring:
         - id: member-service
           uri: lb://member-service
           predicates:
+            - Path=/member-service/members/login
+            - Path=/member-service/email/send
+            - Path=/member-service/email/confirm
             - Path=/member-service/members
             - Method=POST
           filters:
             - StripPrefix=1
-        - id: member-service
-          uri: lb://member-service
-          predicates:
-            - Path=/member-service/members/login
-            - Method=POST
-          filters:
-            - StripPrefix=1
-
         - id: member-service
           uri: lb://member-service
           predicates:

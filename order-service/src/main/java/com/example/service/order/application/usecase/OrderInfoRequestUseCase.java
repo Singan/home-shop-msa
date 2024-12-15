@@ -6,7 +6,6 @@ import com.example.service.order.domain.Order;
 import com.example.service.order.domain.repository.OrderRepository;
 import com.example.service.order.exception.OrderNotFoundException;
 import com.example.service.order.exception.OrderUnAuthorizedException;
-import com.example.service.order.exception.OrderValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

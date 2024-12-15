@@ -1,8 +1,5 @@
 package com.example.service.payment.application.usecase;
 
-import com.example.service.payment.infrastructure.order.OrderClient;
-import com.example.service.payment.infrastructure.order.OrderKafkaProducer;
-import com.example.service.payment.infrastructure.order.dto.OrderInfoDto;
 import com.example.service.payment.application.PaymentServiceFactory;
 import com.example.service.payment.application.dto.request.PaymentConfirmRequestDto;
 import com.example.service.payment.application.dto.response.PaymentConfirmResponseDto;
@@ -10,11 +7,12 @@ import com.example.service.payment.domain.Payment;
 import com.example.service.payment.domain.enums.PaymentStatus;
 import com.example.service.payment.domain.repository.PGRepository;
 import com.example.service.payment.domain.repository.PaymentRepository;
+import com.example.service.payment.infrastructure.order.OrderClient;
+import com.example.service.payment.infrastructure.order.OrderKafkaProducer;
+import com.example.service.payment.infrastructure.order.dto.OrderInfoDto;
 import com.example.service.payment.infrastructure.product.ProductKafkaProducer;
-import com.example.service.payment.infrastructure.product.dto.StockDecreaseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

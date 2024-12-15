@@ -2,17 +2,12 @@ package com.example.service.product.infrastructure.kafka;
 
 import com.example.service.product.domain.Product;
 import com.example.service.product.domain.repository.ProductRepository;
-import com.example.service.product.infrastructure.entity.ProductEntity;
 import com.example.service.product.infrastructure.kafka.dto.StockDecreaseDto;
-import com.example.service.product.infrastructure.repository.ProductJpaRepository;
-import com.example.service.product.infrastructure.repository.ProductRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor

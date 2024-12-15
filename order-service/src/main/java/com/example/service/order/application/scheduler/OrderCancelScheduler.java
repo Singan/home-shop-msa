@@ -1,7 +1,6 @@
 package com.example.service.order.application.scheduler;
 
 import com.example.service.order.application.usecase.OrderCancelUseCase;
-import com.example.service.order.domain.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

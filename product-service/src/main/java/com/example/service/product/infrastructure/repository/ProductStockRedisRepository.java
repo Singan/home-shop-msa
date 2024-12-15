@@ -1,11 +1,9 @@
 package com.example.service.product.infrastructure.repository;
 
-import com.example.service.product.application.dto.cache.ProductDetailCacheDto;
 import com.example.service.product.domain.Product;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 

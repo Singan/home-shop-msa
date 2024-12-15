@@ -1,7 +1,5 @@
 package com.example.service.order.application.dto.response;
 
-import java.time.LocalDateTime;
-
 public record OrderPlaceResponseDto(
         Long orderId,
         Long orderMember,

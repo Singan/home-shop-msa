@@ -1,6 +1,5 @@
 package com.example.service.member.application.usecase;
 
-import com.example.service.member.application.MemberServiceFactory;
 import com.example.service.member.application.dto.request.MemberSignUpDto;
 import com.example.service.member.domain.Member;
 import com.example.service.member.domain.repository.MemberRepository;

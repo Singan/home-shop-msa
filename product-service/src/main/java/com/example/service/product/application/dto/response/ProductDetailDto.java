@@ -1,7 +1,5 @@
 package com.example.service.product.application.dto.response;
 
-import java.time.LocalDateTime;
-
 public record ProductDetailDto(
         Long id,
 
