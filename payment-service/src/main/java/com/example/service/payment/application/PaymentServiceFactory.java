@@ -14,8 +14,7 @@ public class PaymentServiceFactory {
 
         return new PaymentConfirmRequestDto(
                 userId,
-                paymentConfirmRequest.orderId(),
-                paymentConfirmRequest.price()
+                paymentConfirmRequest.orderId()
         );
     }
 

@@ -20,19 +20,22 @@ public class ProductEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
     @NotNull
     private Integer stock;
+
     @NotNull
     private String name;
 
     private String description;
+
     @NotNull
     private Integer price;
+
     private LocalDateTime openDateTime;
 
-
-
     private Boolean isReturnable;
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;

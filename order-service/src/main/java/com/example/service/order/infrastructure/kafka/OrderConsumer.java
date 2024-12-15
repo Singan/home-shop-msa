@@ -18,18 +18,16 @@ public class OrderConsumer {
     private final OrderRepository orderRepository;
 
     @KafkaListener(topics = "order-status-topic", groupId = "order-status-group")
-    public void pendingOrderUpdate(OrderStatusConfirmDto orderStatusConfirmDto, Acknowledgment acknowledgment) {
-        try {
-            log.info("order Status Update 작동 : orderId : {}", orderStatusConfirmDto.id());
-            Order order = orderRepository.findByIdAndPending(orderStatusConfirmDto.id())
-                    .orElseThrow(OrderNotFoundException::new);
-            boolean confirm = order.orderConfirm(orderStatusConfirmDto.confirm());
-            orderRepository.saveOrder(order);
-            if (!confirm) {
-                // 환불 로직
-            }
-        } finally {
-            acknowledgment.acknowledge();
+    public void pendingOrderUpdate(OrderStatusConfirmDto orderStatusConfirmDto) {
+
+        log.info("order Status Update 작동 : orderId : {}", orderStatusConfirmDto.id());
+        Order order = orderRepository.findByIdAndPending(orderStatusConfirmDto.id())
+                .orElseThrow(OrderNotFoundException::new);
+        boolean confirm = order.orderConfirm(orderStatusConfirmDto.confirm());
+        orderRepository.saveOrder(order);
+        if (!confirm) {
+            // 환불 로직
         }
+
     }
 }

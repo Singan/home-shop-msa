@@ -58,6 +58,7 @@ public class OrderEntity implements Serializable {
                 .productId(order.getProductId())
                 .quantity(order.getQuantity())
                 .totalPrice(order.getTotalPrice())
+                .createdAt(order.getCreatedAt())
                 .updatedAt(order.getUpdatedAt())
                 .status(order.getStatus())
                 .build();

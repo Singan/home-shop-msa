@@ -53,7 +53,7 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.service.payment.infrastructure.order.dto");
         configProps.put(JsonDeserializer.TYPE_MAPPINGS,
-                "orderStatusSuccessDto:com.example.service.payment.infrastructure.order.dto.OrderStatusConfirmDto");
+                "orderStatusConfirmDto:com.example.service.payment.infrastructure.order.dto.OrderStatusConfirmDto");
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
